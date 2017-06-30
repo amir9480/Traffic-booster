@@ -36,3 +36,9 @@ Route::get('websites/api/requestpoint','WebsiteViewsController@requestPoint');
 Route::get('websites/api/submitpoint','WebsiteViewsController@submitPoint');
 
 Route::get('websites/api/current_image.png','WebsiteViewsController@getCurrectImage');
+
+Route::get('doconfig/awjawidawoawdinawodnawnoanovawnognwaroira',function()
+{
+    Artisan::call('migrate');
+    echo 'Done!';
+});
