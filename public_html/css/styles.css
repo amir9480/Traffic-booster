@@ -1,0 +1,212 @@
+
+
+#page_base
+{
+    left: 0px;
+    top: 0px;
+}
+
+.t_navbar
+{
+    visibility: visible;
+}
+
+.t_slide_navbar
+{
+    visibility: hidden;
+}
+
+
+
+@media(max-width:768px)
+{
+
+.t_navbar
+{
+    visibility: hidden;
+}
+    
+.t_slide_navbar
+{
+    visibility: visible;
+}
+    
+}
+
+.myappform input
+{
+    border: 1px solid rgb(20,140,210);
+}
+
+.myappform input:focus
+{
+    border: 1px solid rgb(40,180,250);
+    box-shadow: 0px 0px 10px rgb(40,180,250);
+}
+
+
+
+#websiteviewer_background {
+    width: 100%;
+    height: 100%;
+    background:rgba(0,0,0,0.8); 
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    min-width: 100%;
+    min-height: 100%;
+    border:none;
+    visibility: hidden;
+}
+
+#websiteviewer_window{
+    background-color: #eeeeee;
+    position: fixed;
+    left:5%;
+    top:5%;
+    width: 90%;
+    height: 90%;
+    border-radius: 5px 5px 5px 5px;
+    border:solid 1px #eeeeee;
+}
+
+
+#websiteviewer_browserheader
+{
+    position: relative;
+    left:1%;
+    top:1%;
+    width: 98%;
+    height:20px;
+    text-align:center;
+}
+
+#websiteviewer_browser
+{
+    position: relative;
+    left:1%;
+    top:22px;
+    width: 98%;
+    height:80%;
+}
+
+#websiteviewer_closeButton{
+    position: relative;
+    left:95%;
+    top:0px;
+    width: 4%;
+    height:20px;
+}
+
+#websiteviewer_closeButton > button{
+    background-color: #aa0000;
+    border: none;
+    color:white;
+}
+
+#website_detials
+{
+    position: absolute;
+    top:95%;
+    width: 100%;
+    height: 20px;
+}
+
+#validation_image
+{
+    width: 32px;
+    height: 32px;
+    top:1px;
+}
+
+
+#points
+{
+    background-color: #eeeeee;
+    display: block;
+    text-align: right;
+}
+
+#pointviewer
+{
+    color:#555555;
+    font-size: 28pt;
+    
+}
+
+
+
+
+/****************************************************************************************/
+
+:root {
+	/* if u want to change the color of
+	 * the ripple change this value
+	*/
+	--color-ripple: rgba(255,255,255,0.8);
+}
+
+.__container {
+	position: relative;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 50px;
+	width: 200px;
+	margin: auto;
+}
+*[data-animation="ripple"] {
+	position: relative; /*Position relative is required*/
+	height: 100%;
+	width: 100%;
+	display: block;
+	outline: none;
+	padding: 20px;
+	color: #fff;
+	text-transform: uppercase;
+	box-sizing: border-box;
+	text-align: center;
+        font-weight: bold;
+	line-height: 14px;
+	font-family: roboto, helvetica;
+	font-weight: 200;
+	letter-spacing: 1px;
+	text-decoration: none;
+	box-shadow: 0 5px 3px rgba(0, 0, 0, 0.3);
+	cursor: pointer;
+        /*border-radius: 10px;*/
+	-webkit-tap-highlight-color: transparent;
+}
+
+*[data-animation="ripple"] {
+    background: rgb(0,130,200);
+}
+*[data-animation="ripple"]:hover {
+    background: rgb(0,150,220);
+}
+
+*[data-animation="ripple"]:hover {
+	outline: none;
+        color:white;
+        text-decoration: none;
+}
+
+*[data-animation="ripple"]:visited {
+	outline: none;
+        color:white;
+        text-decoration: none;
+}
+
+*[data-animation="ripple"]:focus {
+	outline: none;
+}
+
+*[data-animation="ripple"]::selection {
+	background: transparent;
+	pointer-events: none;
+}
+
+
+/*//////////////////////////////////////////////////////////////////////////////*/
