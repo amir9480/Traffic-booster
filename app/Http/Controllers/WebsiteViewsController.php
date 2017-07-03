@@ -88,7 +88,7 @@ class WebsiteViewsController extends Controller
                 'weburl'=>$wd->url,
                 'title'=>$wd->title,
                 'user_name'=>$wu->name,
-                'timer'=>(($wd->pointpervisit)/2)
+                'timer'=>(($wd->pointpervisit)/5)
             ]);
     }
     
@@ -101,7 +101,8 @@ class WebsiteViewsController extends Controller
         $w=WebsiteViews::whereRaw('website_id = '.$r->input('website_id').' AND user_id = '.$u->id )->first();
         $wd = Websites::where('id',$w->website_id)->first();
         
-        if($now->diffInSeconds(Carbon::parse($w->last_view))<$wd->pointpervisit/2||$w->view_token=='0')
+        if($now->diffInSeconds(Carbon::parse($w->last_view))<$wd->pointpervisit/5
+                ||$w->view_token=='0')
         {
             $w->view_token='0';
             $w->save();
@@ -183,7 +184,7 @@ class WebsiteViewsController extends Controller
         $website = Websites::where('id',$wv->website_id)->first();
         $uw = $website->user;
         
-        if($now->diffInSeconds(Carbon::parse($wv->last_view))< $website->pointpervisit/2 ||
+        if($now->diffInSeconds(Carbon::parse($wv->last_view))< $website->pointpervisit/5 ||
                 $r->input('view_token')!=$wv->view_token)
         {
                     

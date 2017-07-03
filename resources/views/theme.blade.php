@@ -8,14 +8,13 @@
     <link rel='stylesheet' href='{{asset('bootstrap/css/bootstrap.min.css')}}'>
     <link rel='stylesheet' href='{{asset('bootstrap/css/bootstrap-theme.min.css')}}'>
     <link rel='stylesheet' href='{{asset('css/styles.css')}}'>
-    <link href="https://fonts.googleapis.com/css?family=Jomhuria" rel="stylesheet">
     @yield('page_head')
 </head>
 
 <body>
     <div id='page_base'>
         
-    <nav class='navbar navbar-default'>
+    <!--nav class='navbar navbar-default'>
         <div class='container-fluid'>
             <div class='navbar-header'>
                 <a class='navbar-brand' href='{{ $app['url']->to('/') }}'>افزایش ترافیک سایت</a>
@@ -24,7 +23,7 @@
                 @yield('main_menu')
             </ul>
         </div>
-    </nav>
+    </nav!-->
             
         
             @yield('page_body')
@@ -32,10 +31,11 @@
             
     <script src="{{ asset('jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('bootstrap/css/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/button_ripple.js')}}"></script>
+    <script src="{{ asset('js/script01.js')}}"></script>
     @yield('page_footer')
     
     </div>
+    @yield('page_body2',' ')
 </body>
 
 </html>
