@@ -12,6 +12,7 @@ use Carbon\Carbon;
 
 use Illuminate\Auth\Access\Response;
 
+// آیکون ها و اسم های آن ها
 const icon_images=
 [
     ['name' => 'ببر'       ,      'file' => 'images/1498764215_Tiger.png'],
@@ -24,12 +25,6 @@ const icon_images=
 ];
 
 
-function getIconImages()
-{
-    global $icon_images;
-    return $icon_images;
-}
-
 class WebsiteViewsController extends Controller
 {
     public function __construct()
@@ -37,6 +32,7 @@ class WebsiteViewsController extends Controller
         $this->middleware('usersonly');
     }
     
+    // درخواست مشاهده ی سایت به صورت ایجکس
     public function requestVisit(Request $r)
     {
         $able=true;
@@ -46,18 +42,20 @@ class WebsiteViewsController extends Controller
         
         
         $w=WebsiteViews::whereRaw('website_id = '.$r->input('website_id').' AND user_id = '.$u->id )->first();
+        // اگه تاحالا مشاهده ای با این مشخصات وجود نداشت یکی میسازیم
         if($w===null)
         {
             WebsiteViews::create([
                 'user_id'=>$u->id,
                 'website_id'=>$r->input('website_id'),
                 'view_token'=>str_random(16),
-                'last_view'=> (Carbon::now()->subDay())
+                'last_view'=> (Carbon::now()->subDay()) // یه روز ازش کم میکنیم تا ارور نده موقع مشاهده . حداقل یک ساعت فاصله لازمه
             ]);
             $w=WebsiteViews::whereRaw('website_id = '.$r->input('website_id').' AND user_id = '.$u->id )->first();
         }
         $wd = Websites::where('id',$w->website_id)->first();
         
+        // اگه وبسایت مورد نظر یا کاربر مورد نظر وجود نداشته حتما یه خراب کاری وجود داره
         if($wd===null or $u === null)
         {
             return response()->json([
@@ -66,6 +64,7 @@ class WebsiteViewsController extends Controller
         }
         
         
+        // اگه در مدت یک ساعت قبل آخرین بار بازدید شده کاربر نمیتونه امتیاز بگیره
         if($now->diffInHours(Carbon::parse($w->last_view))<1)
         {
             $able=false;
@@ -74,6 +73,7 @@ class WebsiteViewsController extends Controller
         if($able==true)
         {
             $w->last_view = Carbon::now();
+            // یه مقدار اعتبار سنجی جدید حاضر میکنیم
             $w->view_token=str_random(16);
             $w->save();
         }
@@ -93,6 +93,7 @@ class WebsiteViewsController extends Controller
     }
     
     
+    // درخواست فرم اعتبار سنجی
    public function requestPoint(Request $r)
     {
         $able=true;
@@ -101,10 +102,11 @@ class WebsiteViewsController extends Controller
         $w=WebsiteViews::whereRaw('website_id = '.$r->input('website_id').' AND user_id = '.$u->id )->first();
         $wd = Websites::where('id',$w->website_id)->first();
         
+        // اگه فاصله زمانی بین انتخاب گزینه و لحظه شروع مشاهده کمتر از این مقدار بوده یعنی کاربر سعی کرده دستی مقدار بده و کد جاوا اسکریپت رو دور بزنه
         if($now->diffInSeconds(Carbon::parse($w->last_view))<$wd->pointpervisit/5
-                ||$w->view_token=='0')
+                ||$w->view_token=='0') // اگه این صفر بود یعنی این مشاهده امتیازش قبلا دریافت شده
         {
-            $w->view_token='0';
+            $w->view_token='0'; //صفر به این معنیه که کاربر امتیازش رو گرفته
             $w->save();
             return response()->json([
                 'able'=>false,

@@ -16,9 +16,10 @@ class UserManagmentController extends Controller
     }
     
 
-
+    // این دستور برای زمان ورود میباشد
     public function signin(Request $r)
     {
+        // اگه هنوز دیتایی فرستاده نشده باشه این دستور فراخوانی بشه
         if($r->isMethod('get'))
         {
             return view('login');
@@ -44,6 +45,7 @@ class UserManagmentController extends Controller
         return redirect('/websites')->withCookie('usersession',$u->usersession)->withCookie('userid',$u->username);
     }
     
+    // جهت ثبت نام
     public function signup(Request $r)
     {
         if($r->isMethod('get'))

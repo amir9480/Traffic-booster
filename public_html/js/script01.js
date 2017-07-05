@@ -96,7 +96,7 @@ $(document).ready(function(){
    $(".home_features_center").hide();
    
    
-    if(hide_float_menu_on_top===false&&$(window).height()>=752)
+    if(hide_float_menu_on_top===false && $(window).width()>=752)
     {
         $("#main_menu_bar_float").css('visibility','visible');
         $("#main_menu_bar_float").show();

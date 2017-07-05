@@ -26,7 +26,7 @@
         <span id="pointviewer">امتیاز شما  {{$point}}</span>
         <br><br>
     </div>
-    
+    <span>جهت حزف کردن سایتتان از صفحه ی وبسایت ها از طریق گزینه ی اصلاح مشخصات مقدار امتیاز را به صفر تغییر دهید</span>
 <table class='table table-striped'>
     <thead>
     <td>عنوان سایت</td>

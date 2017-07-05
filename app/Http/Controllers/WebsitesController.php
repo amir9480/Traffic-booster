@@ -20,6 +20,7 @@ class WebsitesController extends Controller
         
     }
     
+    // افزودن یک سایت جدید
     public function addWebsite(Request $r)
     {
         if($r->isMethod('get'))

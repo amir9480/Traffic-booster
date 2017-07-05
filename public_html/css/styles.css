@@ -336,6 +336,12 @@ html,body{
 
 /******************************************************************************/
 
+
+.main_menubar_link
+{
+    color:white;
+}
+
 #main_menu_bar
 {
     display: block;
@@ -349,11 +355,11 @@ html,body{
     padding: 0px;
     z-index: 2;
 }
-
 #main_menu_bar *
 {
     transition: 0.3s;
 }
+
 
 #main_menu_bar ul
 {
@@ -384,7 +390,7 @@ html,body{
     color: rgb(255,149,30);
 }
 
-#main_menu_bar li a
+#main_menu_bar a
 {
     color:white;
     text-decoration: none;

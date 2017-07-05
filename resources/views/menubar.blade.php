@@ -1,14 +1,14 @@
 @if($type==1)
-<li @if($active=='home')        class='active' @endif><a href='{{$app['url']->to('/')}}'>خانه</a></li>
-<li @if($active=='sign_up')     class='active' @endif><a href='{{$app['url']->to('/signup')}}'>ثبت نام</a></li>
-<li @if($active=='sign_in')     class='active' @endif><a href='{{$app['url']->to('/signin')}}'>ورود</a></li>
+<a class='main_menubar_link' href='{{$app['url']->to('/')}}'><li @if($active=='home')        class='active' @endif>خانه</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/signup')}}'><li @if($active=='sign_up')     class='active' @endif>ثبت نام</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/signin')}}'><li @if($active=='sign_in')     class='active' @endif>ورود</li></a>
 
 @endif
 
 @if($type==2)
-<li @if($active=='websites')        class='active' @endif><a href='{{$app['url']->to('/websites')}}'>وبسایت ها</a></li>
-<li @if($active=='add_website')     class='active' @endif><a href='{{$app['url']->to('/websites/addwebsite')}}'>افزودن وبسایت جدید</a></li>
-<li @if($active=='my_websites')     class='active' @endif><a href='{{$app['url']->to('/websites/mywebsites')}}'> وبسایت های من</a></li>
-<li><a href='{{$app['url']->to('/logout')}}'>خروج از ناحیه ی کاربری</a></li>
+<a class='main_menubar_link' href='{{$app['url']->to('/websites')}}'><li @if($active=='websites')        class='active' @endif>وبسایت ها</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/websites/addwebsite')}}'><li @if($active=='add_website')     class='active' @endif>افزودن وبسایت جدید</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/websites/mywebsites')}}'><li @if($active=='my_websites')     class='active' @endif> وبسایت های من</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/logout')}}'><li>خروج از ناحیه ی کاربری</li></a>
 
 @endif
