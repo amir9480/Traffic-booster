@@ -13,21 +13,65 @@
 
 <body>
     <div id='page_base'>
-        
-    <!--nav class='navbar navbar-default'>
-        <div class='container-fluid'>
-            <div class='navbar-header'>
-                <a class='navbar-brand' href='{{ $app['url']->to('/') }}'>افزایش ترافیک سایت</a>
-            </div>
-            <ul class="nav navbar-nav">
-                @yield('main_menu')
-            </ul>
-        </div>
-    </nav!-->
             
         
             @yield('page_body')
+    
+
+<div class='container' id="home_footer_layout">
+    <br>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4>آخرین سایت های ثبت شده</h4>
+            <ul>
+                <li><a href='#'>A1</a></li>
+                <li><a href='#'>A2</a></li>
+                <li><a href='#'>A3</a></li>
+                <li><a href='#'>A4</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h4>آخرین اخبار</h4>
+            <ul>
+                <li><a href='#'>NEWS1</a></li>
+                <li><a href='#'>NEWS2</a></li>
+                <li><a href='#'>NEWS3</a></li>
+                <li><a href='#'>NEWS4</a></li>
+            </ul>
+        </div>
+        <div class="col-sm-4">
+            <h4>آخرین نظرات</h4>
+            <ul>
+                <li><a href='#'>COMMENT1</a></li>
+                <li><a href='#'>COMMENT2</a></li>
+                <li><a href='#'>COMMENT3</a></li>
+                <li><a href='#'>COMMENT4</a></li>
+            </ul>
+        </div>
+    </div>
+    <br>
+    <span>&copy; Copy Right . All right reserved for traffic booster . 2017</span>
+</div>
             
+    <div id='mobile_menu_bar'>
+        <ul>
+            @yield('main_menu')
+        </ul>
+    </div>
+    <a href='#'><div id='mobile_menu_bar_close'>
+        &times
+    </div></a>
+    <div id="mobile_header_menu">
+        <div id="mobile_header_menu_button">
+        &#9776;
+        </div>
+    </div>
+<div id='mobile_menu_bar_cover'></div>
+    <div id='main_menu_bar_float'>
+        <ul>
+            @yield('main_menu')
+        </ul>
+    </div>
             
     <script src="{{ asset('jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('bootstrap/css/bootstrap.min.js')}}"></script>

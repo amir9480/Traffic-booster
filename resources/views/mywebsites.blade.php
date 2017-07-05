@@ -16,7 +16,11 @@
 
 @section('page_body')
 
-<div class='container'>
+<div id='non_home_header_image' class="container">
+    <div style="height: 10px;"></div> 
+   <h1>افزایش بازدید رایگان سایت شما</h1>
+</div>
+<div class='container main-content'>
     <div id="points">
         <br><br>
         <span id="pointviewer">امتیاز شما  {{$point}}</span>
@@ -24,14 +28,20 @@
     </div>
     
 <table class='table table-striped'>
-    
+    <thead>
+    <td>عنوان سایت</td>
+    <td>امتیاز به ازای هر بازدید</td>
+    <td>اصلاح</td>
+    </thead>
+    <tbody>
     @foreach($ws as $website)
         <tr>
             <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td> <a href="{{$app['url']->to('websites/editwebsite')}}?website_id={{$website->id}}"><button>اصلاح مشخصات</button></a></td> 
         </tr>
     @endforeach
+    </tbody>
 </table>
-    
+@if($pagecount>1)  
     <ul class="pagination">
         @if($page>=1)
             <li><a href="{{$app['url']->to('websites/mywebsites')}}?page={{$page-1}}">قبلی</a></li>
@@ -48,6 +58,7 @@
             <li><a href="{{$app['url']->to('websites/mywebsites')}}?page={{$page+1}}">بعدی</a></li>
         @endif
     </ul>
+@endif
 </div>
 
 @endsection

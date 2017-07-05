@@ -2,6 +2,7 @@
 
 @section('page_title','افزایش ترافیک سایت - ورود کاربران')
 
+
 @section('page_head')
 
 @endsection
@@ -17,7 +18,12 @@
 @endsection
 
 @section('page_body')
-<div class='container'>
+<div id='non_home_header_image' class="container">
+    <div style="height: 10px;"></div> 
+   <h1>افزایش بازدید رایگان سایت شما</h1>
+</div>
+<div class='container main-content' >
+<br><br>
 <div style='text-align:right;'>
 @if ($errors->any())
     <div class="alert alert-danger">
@@ -38,23 +44,24 @@
     </div>
 @endif
 
-<form class="myappform" dir="rtl" action="{{$app['url']->to('/signin')}}" method="post">
+<div class="myform_layout">
+<form class="myappform form-horizontal center-block" action="{{$app['url']->to('/signin')}}" method="post">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <table class="table">
-        <tr>
-            <td>نام کاربری</td>
-            <td> <input type="text" name="username"> </td>
-        </tr>
-        <tr>
-            <td>رمز عبور</td>
-            <td> <input type="password" name="password"> </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td> <input type="submit" value="ورود"> </td>
-        </tr>
-    </table>
+        <div class="form-group">
+            <lable class="control-label col-sm-4" for="username">نام کاربری</lable>
+            <div class="col-sm-8"><input class="form-control" type="text" name="username"></div>
+        </div>
+        <div class="form-group">
+            <lable class="control-label col-sm-4" for="password">رمز عبور</lable>
+            <div class="col-sm-8"><input class="form-control" type="password" name="password"></div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-8"><input class="btn btn-default" type="submit" value="ورود"></div>
+        </div>
 </form>
+</div>
+<br><br><br><br><br><br>
     
 </div>
 </div>

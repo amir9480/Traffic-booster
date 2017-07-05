@@ -40,17 +40,22 @@ html,body{
 }
 
 
-.myappform input
+.myappform
 {
-    border: 1px solid rgb(20,140,210);
+    background-color: rgba(255,255,255,0.7);
     transition: 0.25s;
+    padding:20px;
+    max-width: 500px;
 }
 
-.myappform input:focus
+.myappform .form-group *
 {
-    border: 1px solid rgb(40,180,250);
-    box-shadow: 0px 0px 10px rgb(40,180,250);
-    transition: 0.25s;
+    float:right !important;
+}
+
+.myform_layout
+{
+    display: block;
 }
 
 
@@ -120,6 +125,7 @@ html,body{
     top:95%;
     width: 100%;
     height: 20px;
+    text-align: right;
 }
 
 #validation_image
@@ -153,6 +159,30 @@ html,body{
 @keframe homeHeaderShow{
     0% {opacity:0.0;}
     100% {opacity:1.0;}
+}
+
+#non_home_header_image
+{
+    background-color: #111111;
+    background-image: url('/images/mountain_op.jpg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    height: 200px;
+    top: 0px;
+    z-index: -1;
+    text-align: center;
+}
+
+#non_home_header_image h1
+{
+    position: relative;
+    text-align: center;
+    top: 25%;
+    color:white;
+    animation-name: homeHeaderShadow;
+    animation-duration: 2.0s;
+    animation-iteration-count: infinite;
 }
 
 #home_header_image
@@ -240,6 +270,17 @@ html,body{
     border: 1px #ffffff;
     border-radius: 4px;
     box-shadow: 0px 0px 15px #0045ef;
+    text-align: right;
+}
+
+.home_features span
+{
+    text-align: right;
+}
+
+.home_features h3
+{
+    text-align: center;
 }
 
 .home_features_center
@@ -253,7 +294,19 @@ html,body{
     border: 1px #ffffff;
     border-radius: 4px;
     box-shadow: 0px 0px 15px #ff4b00;
+    text-align: right;
 }
+
+.home_features_center span
+{
+    text-align: right;
+}
+
+.home_features_center h3
+{
+    text-align: center;
+}
+
 
 .home_features h3,.home_features_center h3
 {
@@ -273,6 +326,12 @@ html,body{
 .main-content
 {
     background-color: #55ccff;
+    text-align: right;
+    padding:20px;
+}
+
+.main-content .table-striped > tbody > tr:nth-child(even) > td,.main-content .table-striped > tbody > tr:nth-child(even) > th {
+   background-color: #eeeeee;
 }
 
 /******************************************************************************/
@@ -319,6 +378,10 @@ html,body{
 #main_menu_bar li:hover:not(.active)
 {
     background-color: rgba(0,147,235,0.7);
+}
+#main_menu_bar li:hover:not(.active) *
+{
+    color: rgb(255,149,30);
 }
 
 #main_menu_bar li a
@@ -368,7 +431,8 @@ html,body{
     float:right;
     border-left: solid 1px #009fff;
     display: block;
-    width: 80px;
+    width: auto;
+    min-width: 80px;
     text-align: center;
     padding: 14px 10px;
     margin: 0px;
@@ -378,6 +442,10 @@ html,body{
 #main_menu_bar_float li:hover:not(.active)
 {
     background-color: rgba(0,147,235,0.7);
+}
+#main_menu_bar_float li:hover:not(.active) *
+{
+    color: rgb(255,149,30);
 }
 
 #main_menu_bar_float li a
@@ -405,7 +473,7 @@ html,body{
     background-color: #222222;
     margin: 0px;
     padding: 0px;
-    z-index: 2;
+    z-index: 3;
     transition: 0.5s;
     overflow-y: auto;
     
@@ -442,6 +510,10 @@ html,body{
 {
     background-color: rgba(0,147,235,0.7);
 }
+#mobile_menu_bar li:hover:not(.active) *
+{
+    color: rgb(255,149,30);
+}
 
 #mobile_menu_bar li a
 {
@@ -462,7 +534,7 @@ html,body{
     left: -36px;
     width: 36px;
     height: 36px;
-    z-index: 2;
+    z-index: 3;
     background-color: #555555;
     text-align: center;
     text-decoration: none;
@@ -509,7 +581,7 @@ html,body{
     margin: 0px;
     padding: 0px;
     z-index: 2;
-    transition: 0.7s;
+    transition: 1.0s;
     
     visibility: hidden;
 }
@@ -528,6 +600,54 @@ html,body{
     cursor: hand;
     cursor: pointer;
 }
+
+/*******************************************************************************/
+#text_content
+{
+    transition: 0.5s;
+}
+
+#home_footer_layout
+{
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#333333+0,191919+100 */
+    background: #333333; /* Old browsers */
+    background: -moz-linear-gradient(top, #333333 0%, #191919 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #333333 0%,#191919 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #333333 0%,#191919 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#333333', endColorstr='#191919',GradientType=0 ); /* IE6-9 */
+
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+
+    
+    text-align: right;
+   
+    
+    color:#0075ff;
+    
+}
+
+#home_footer_layout *
+{
+    transition: 0.5s;
+}
+
+#home_footer_layout ul
+{
+    list-style:none;
+    padding:2px;
+}
+
+#home_footer_layout a
+{
+    text-decoration: none;
+}
+#home_footer_layout a:hover
+{
+    color:#ff8b00;
+}
+
 
 /*******************************************************************************/
 

@@ -17,7 +17,11 @@
 @endsection
 
 @section('page_body')
-<div class='container'>
+<div id='non_home_header_image' class="container">
+    <div style="height: 10px;"></div> 
+   <h1>افزایش بازدید رایگان سایت شما</h1>
+</div>
+<div class='container main-content'>
 <div style='text-align:right;'>
 @if( isset($successfull) )
     <h2>ثبت نام شما موفقیت آمیز بود  هم اکنون میتوانید وارد قسمت کاربری شوید</h2>
@@ -34,36 +38,37 @@
     </div>
 @endif
 
-<form class="myappform" dir="rtl" action="{{$app['url']->to('/signup')}}" method="post">
+<div class="myform_layout">
+<form class="myappform form-horizontal center-block" dir="rtl" action="{{$app['url']->to('/signup')}}" method="post">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
-    <table class="table">
-        <tr>
-            <td>نام</td>
-            <td> <input type="text" name="thename" value="{{$thename or ''}}"> </td>
-        </tr>
-        <tr>
-            <td>نام کاربری</td>
-            <td> <input type="text" name="username" value="{{$username or ''}}"> </td>
-        </tr>
-        <tr>
-            <td>ایمیل</td>
-            <td> <input type="email" name="email" value="{{$email or ''}}"> </td>
-        </tr>
-        <tr>
-            <td>رمز عبور</td>
-            <td> <input type="password" name="password"> </td>
-        </tr>
-        <tr>
-            <td>تکرار رمز عبور</td>
-            <td> <input type="password" name="passwordr"> </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td> <input type="submit" value="ثبت نام"> </td>
-        </tr>
-    </table>
+        <div class="form-group">
+            <label class='control-label col-sm-4'> نام</label>
+            <div class="col-sm-8"> <input class="form-control" type="text" name="thename" value="{{$thename or ''}}"> </div>
+        </div>
+        <div class="form-group">
+            <label class='control-label col-sm-4'>نام کاربری</label>
+            <div class="col-sm-8"> <input class="form-control" type="text" name="username" value="{{$username or ''}}"> </div>
+        </div>
+        <div class="form-group">
+            <label class='control-label col-sm-4'>ایمیل</label>
+            <div class="col-sm-8"> <input class="form-control" type="email" name="email" value="{{$email or ''}}"> </div>
+        </div>
+        <div class="form-group">
+            <label class='control-label col-sm-4'>رمز عبور</label>
+            <div class="col-sm-8"> <input class="form-control" type="password" name="password"> </div>
+        </div>
+        <div class="form-group">
+            <label class='control-label col-sm-4'>تکرار رمز عبور</label>
+            <div class="col-sm-8"> <input class="form-control" type="password" name="passwordr"> </div>
+        </div>
+        <div class="form-group">
+        <div class="col-sm-4"></div>
+        <div class="col-sm-8"> <input class="btn btn-default" type="submit" value="ثبت نام"> </div>
+        </div>
 </form>
+</div>
 @endif
 </div>
+    <br><br><br>
 </div>
 @endsection

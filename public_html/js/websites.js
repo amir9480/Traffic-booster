@@ -7,7 +7,7 @@ var wurl;
 function hideVBrowser()
 {
     isclosed=true;
-    $('#websiteviewer_background').hide();
+    $('#websiteviewer_background').fadeOut();
 }
 
 function submitTest(view_token)
@@ -67,9 +67,9 @@ function browserTimer()
 function showwebsite(weburl,websiteid)
 {
     $('#websiteviewer_background').css('visibility','visible');
-    $('#websiteviewer_browserheader').html('<center>Loading...</center>');
+    $('#websiteviewer_browserheader').html('<center>در حال بارگزاری...</center>');
     $('#websiteviewer_browser').html('');
-    $('#websiteviewer_background').show();
+    $('#websiteviewer_background').fadeIn();
     isclosed=false;
     $.ajax({
             url:weburl+'/websites/api/requestvisit?website_id='+websiteid,
@@ -91,7 +91,7 @@ function showwebsite(weburl,websiteid)
                 btimer=dr.timer;
                 current_site_id=websiteid;
                 wurl=weburl;
-                $("#website_detials").html('<span>وبسایت توسط : '+dr.user_name+' | <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a></span>');
+                $("#website_detials").html('<span>  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | '+dr.user_name+'وبسایت توسط  </span>');
             }
     });
     

@@ -15,7 +15,11 @@
 @endsection
 
 @section('page_body')
-<div class='container'>
+<div id='non_home_header_image' class="container">
+    <div style="height: 10px;"></div> 
+   <h1>افزایش بازدید رایگان سایت شما</h1>
+</div>
+<div class='container main-content'>
 <div style='text-align:right;'>
 @if( isset($successfull) )
     <h2>وبسایت شما بروزرسانی شد</h2>
@@ -31,29 +35,28 @@
         </ul>
     </div>
 @endif
-
-<form class="myappform" dir="rtl" action="{{$app['url']->to('/websites/editwebsite')}}" method="post">
+<div class='myform_layout'>
+<form class="myappform form-horizontal center-block" dir="rtl" action="{{$app['url']->to('/websites/editwebsite')}}" method="post">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
         <input type="hidden" name="website_id" value="{{$website_id}}">
-    <table class="table">
-        <tr>
-            <td>عنوان سایت</td>
-            <td> <input type="text" name="webtitle" value="{{$webtitle or ''}}"> </td>
-        </tr>
-        <tr>
-            <td>آدرس سایت</td>
-            <td> <input type="url" name="weburl" value="{{$weburl or ''}}"> </td>
-        </tr>
-        <tr>
-            <td>امتیاز به ازای هر بازدید</td>
-            <td> <input type="number" name="ppv" value="{{$ppv or '10'}}"> </td>
-        </tr>
-        <tr>
-            <td>&nbsp;</td>
-            <td> <input type="submit" value="بروزرسانی سایت"> </td>
-        </tr>
-    </table>
+    <div class='form-group'>
+            <label class='control-label col-sm-4'>عنوان سایت </label>
+            <div class='col-sm-8'> <input type="text" name="webtitle" value="{{$webtitle or ''}}"> </div>
+        </div>
+        <div class='form-group'>
+            <label class='control-label col-sm-4'> آدرس سایت</label>
+            <div class='col-sm-8'> <input type="url" name="weburl" value="{{$weburl or ''}}"> </div>
+        </div>
+        <div class='form-group'>
+            <label class='control-label col-sm-4'> امتیاز به ازای هر بازدید</label>
+            <div class='col-sm-8'>  <input type="number" name="ppv" value="{{$ppv or '10'}}"> </div>
+        </div>
+        <div class='form-group'>
+            <div class='col-sm-4'></div>
+            <div class='col-sm-8'>  <input class='btn btn-default' type="submit" value="ثبت سایت"> </div>
+        </div>
 </form>
+</div>
 @endif
 </div>
 </div>
