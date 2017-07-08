@@ -11,13 +11,14 @@
 
 @endsection
 
+
 @section('main_menu')
     @include('menubar',['type'=>'2','active'=>'add_website'])
 @endsection
 
 @section('page_body')
 <div id='non_home_header_image' class="container">
-    <div style="height: 10px;"></div> 
+    <div style="height: 10px;"></div>
    <h1>افزایش بازدید رایگان سایت شما</h1>
 </div>
 <div class='container main-content'>
@@ -37,6 +38,12 @@
     </div>
 @endif
 
+@if(isset($recaptcha_error))
+<div class="alert alert-danger">
+  {{$recaptcha_error}}
+</div>
+@endif
+
 <div class='myform_layout'>
 <form class="myappform form-horizontal center-block" dir="rtl" action="{{$app['url']->to('/websites/addwebsite')}}" method="post">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -50,7 +57,11 @@
         </div>
         <div class='form-group'>
             <label class='control-label col-sm-4'> امتیاز به ازای هر بازدید</label>
-            <div class='col-sm-8'>  <input type="number" name="ppv" value="{{$ppv or '10'}}"> </div>
+            <div class='col-sm-8'>  <input type="number" name="ppv" value="{{$ppv or '10'}}"  min='0' max='1000'> </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-8 g-recaptcha" data-sitekey="6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS"></div>
         </div>
         <div class='form-group'>
             <div class='col-sm-4'></div>

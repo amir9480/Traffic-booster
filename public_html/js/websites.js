@@ -12,7 +12,7 @@ function hideVBrowser()
 
 function submitTest(view_token)
 {
-    $('#websiteviewer_browserheader').html('<center>لطفا کمی  صبر کنید</center>');
+    $('#websiteviewer_browserheader').html('<center>...در حال بررسی</center>');
     $.ajax({
             url:wurl+'/websites/api/submitpoint?website_id='+current_site_id+'&view_token='+view_token,
             success:function(dr) {
@@ -27,6 +27,7 @@ function submitTest(view_token)
                 $("#pointviewer").html('امتیاز شما : '+ dr.point );
             }
         });
+
 }
 
 function showTester()
@@ -45,7 +46,7 @@ function showTester()
                 <button onclick=\"submitTest(\'`+dr.v0.value+`\')\">`+dr.v0.name+`</button>
                 <button onclick=\"submitTest(\'`+dr.v1.value+`\')\">`+dr.v1.name+`</button>
                 <button onclick=\"submitTest(\'`+dr.v2.value+`\')\">`+dr.v2.name+`</button>
-                
+
                 گزینه ی صحیح را انتخاب کنید
                 </center>`);
             }
@@ -57,24 +58,26 @@ function browserTimer()
     if(isclosed===true)
         return;
     btimer-=1;
-    $('#websiteviewer_browserheader').html(' <center>  لطفا'+parseInt(btimer)+'ثانیه صبر کنید   </center> ');
+    $('#websiteviewer_browserheader').html(' <center> &nbsp;لطفا&nbsp; '+parseInt(btimer)+' &nbsp;ثانیه صبر کنید&nbsp; </center> ');
     if(btimer>0)
         setTimeout(browserTimer,1000);
     else
         showTester();
+
 }
 
 function showwebsite(weburl,websiteid)
 {
     $('#websiteviewer_background').css('visibility','visible');
-    $('#websiteviewer_browserheader').html('<center>در حال بارگزاری...</center>');
+    $('#websiteviewer_browserheader').html('<center>...در حال بارگزاری</center>');
     $('#websiteviewer_browser').html('');
     $('#websiteviewer_background').fadeIn();
+    $('#website_detials').html(' ');
     isclosed=false;
     $.ajax({
             url:weburl+'/websites/api/requestvisit?website_id='+websiteid,
             success:function(dr) {
-                $('#websiteviewer_browser').html('<iframe style=\'width: 100%;height: 100%;\' src=\''+dr.weburl+'\'></iframe>');
+                $('#websiteviewer_browser').html('<iframe sandbox=\'\' style=\'width: 100%;height: 100%;\' src=\''+dr.weburl+'\'></iframe>');
                 if(dr.selfwebsite===true)
                 {
                     $('#websiteviewer_browserheader').html('<center> این وبسایت توسط خود شما ثبت شده است </center>');
@@ -83,16 +86,16 @@ function showwebsite(weburl,websiteid)
                 {
                     $('#websiteviewer_browserheader').html('<center>شما اخیرا از این سایت بازدید کرده اید . لطفا بعدا تلاش کنید</center>');
                 }
-                else 
+                else
                 {
-                    $('#websiteviewer_browserheader').html('<center> لطفا'+parseInt(dr.timer)+'ثانیه صبر کنید </center>');
+                    $('#websiteviewer_browserheader').html('<center> &nbsp;لطفا&nbsp; '+parseInt(dr.timer)+'&nbsp;ثانیه صبر کنید &nbsp;</center>');
                     setTimeout(browserTimer,1000);
                 }
                 btimer=dr.timer;
                 current_site_id=websiteid;
                 wurl=weburl;
-                $("#website_detials").html('<span>  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | '+dr.user_name+'وبسایت توسط  </span>');
+                $("#website_detials").html('<span>  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | &nbsp;'+dr.title+' &nbsp; '+dr.user_name+'</span>');
             }
     });
-    
+
 }

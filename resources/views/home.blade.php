@@ -15,6 +15,7 @@
 @endsection
 
 
+
 @section('main_menu')
     @include('menubar',['type'=>'1','active'=>'home'])
 @endsection
@@ -27,7 +28,7 @@
             @include('menubar',['type'=>'1','active'=>'home'])
         </ul>
     </div>
-    
+
    <h1>افزایش بازدید رایگان سایت شما</h1>
    <div id='home_header_read_more_button'><a id='home_header_read_more' href='#content_start'>بیشتر بدانید</a></div>
 </div>
@@ -66,23 +67,23 @@
         شما برای آنکه بتوانید سایت های خود را به دیگران نشان دهید نیاز به امتیاز دارید.
         زیرا کسانی از سایت شما بازدید خواهند کرد برای اینکارشان امتیاز کسب میکنند.
         شما میتوانید با مشاهده کردن سایت سایر کاربران برای خودتان امتیاز کسب کنید<br>
-        
+
         شاید بشه این سایت رو این شکلی نامید:<br>
         وبسایتم رو ببین! وبسایتت رو میبینم!<br>
         <br>
         هم اکنون ثبت نام کنید و از امکانات سایت لذت ببرید
-        
-        
-        
+
+
+
             </div>
         </div>
-            
+
     </span>
 <div style='height:30px;'>
 </div>
 
 </div>
 
-    
+
 
 @endsection

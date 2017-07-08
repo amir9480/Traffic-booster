@@ -37,7 +37,7 @@ Route::match(['get','post'],'websites/addwebsite','WebsitesController@addWebsite
 // اصلاح سایت وجود کاربر
 Route::match(['get','post'],'websites/editwebsite','WebsitesController@editWebsite');
 
-//AJAX درخواست مشاهده ی سایت   
+//AJAX درخواست مشاهده ی سایت
 Route::get('websites/api/requestvisit','WebsiteViewsController@requestVisit');
 
 // AJAX  درخواست فرم اعتبار سنجی
@@ -48,6 +48,7 @@ Route::get('websites/api/submitpoint','WebsiteViewsController@submitPoint');
 
 // Ajax تصویر اعتبار سنجی
 Route::get('websites/api/current_image.png','WebsiteViewsController@getCurrectImage');
+
 
 
 // جهت انجام کانفیگ های لازم . چنانچه به پایان رسید حتما این قسمت کامنت شود

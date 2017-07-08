@@ -10,6 +10,11 @@ use Validator;
 
 use \Test\UserManagment;
 
+require_once(app_path().'/external_libs.php');
+use ReCaptcha\ReCaptcha;
+
+const recaptcha_secret = "6LfaYSgUAAAAAMQtEi8xj8hXnVWxtyzg_Z9L2hLO";
+const recaptcha_site="6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS";
 
 class WebsitesController extends Controller
 {
@@ -17,9 +22,9 @@ class WebsitesController extends Controller
         $this->middleware('usersonly');
     }
     public function __destruct() {
-        
+
     }
-    
+
     // افزودن یک سایت جدید
     public function addWebsite(Request $r)
     {
@@ -27,6 +32,18 @@ class WebsitesController extends Controller
         {
             return view('addwebsite');
         }
+        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if($recaptcha_response->isSuccess()===false)
+        {
+          return view('addwebsite')->with([
+                  'recaptcha_error'=>'  لطفا بر روی گزینه ی من یک ربات نیستم کلیک کنید ',
+                  'webtitle'=>$r->input('webtitle'),
+                  'weburl'=>$r->input('weburl'),
+                  'ppv'=>$r->input('ppv'),
+                  ]);
+        }
+
         $v=Validator::make($r->all(),[
             'webtitle'=>'required|max:1024',
             'weburl'=>'required|max:1024,url',
@@ -40,21 +57,21 @@ class WebsitesController extends Controller
                 'ppv'=>$r->input('ppv'),
                     ]);
         }
-        
+
         $u=UserManagment::getCurrentUser($r);
-        
+
         Websites::create([
             'title'=>$r->input('webtitle'),
             'url'=>$r->input('weburl'),
             'pointpervisit'=>$r->input('ppv'),
             'user_id'=> $u->id
         ]);
-        
+
         return view('addwebsite')->with([
             'successfull'=>'true'
             ]);
     }
-    
+
     public function editWebsite(Request $r)
     {
         $cu = UserManagment::getCurrentUser($r);
@@ -72,10 +89,22 @@ class WebsitesController extends Controller
                 'website_id'=>$r->input('website_id')
                     ]);
         }
+        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if($recaptcha_response->isSuccess()===false)
+        {
+          return view('editwebsite')->with([
+                  'recaptcha_error'=>'  لطفا بر روی گزینه ی من یک ربات نیستم کلیک کنید ',
+                      'webtitle'=>$w->title,
+                      'weburl'=>$w->url,
+                      'ppv'=>$w->pointpervisit,
+                      'website_id'=>$r->input('website_id')
+                  ]);
+        }
         $c_url=$w->url;
         $w->url='   ';
         $w->save();
-        
+
         $v=Validator::make($r->all(),[
             'webtitle'=>'required|max:1024',
             'weburl'=>'required|max:1024,url',
@@ -100,7 +129,7 @@ class WebsitesController extends Controller
             'successfull'=>'true'
             ]);
     }
-    
+
     public function showWebsites(Request $r)
     {
         if($r->has('rs')||$r->has('page'))
@@ -114,7 +143,7 @@ class WebsitesController extends Controller
                 return abort(404);
             }
         }
-        
+
         $randnum= rand(0,5000);
         $ws= Websites::select(['websites.id','websites.title','websites.pointpervisit','websites.url','websites.user_id'])->
                 whereRaw('websites.pointpervisit > 0 AND((SELECT user_managment.point FROM `user_managment` WHERE id = websites.user_id )>websites.pointpervisit)')->
@@ -122,10 +151,10 @@ class WebsitesController extends Controller
                 limit(20)->offset($r->input('page',0)*20);
         $wcount= Websites::select(['websites.user_id'])->
                 whereRaw('(SELECT user_managment.point FROM `user_managment` WHERE id = websites.user_id )>websites.pointpervisit')->count();
-        
-        
+
+
         $u=UserManagment::getCurrentUser($r);
-        
+
         return view('websites')->with([
             'ws'=>$ws->get(),
             'page'=>$r->input('page',0),
@@ -135,8 +164,8 @@ class WebsitesController extends Controller
             'point'=>$u->point,
         ]);
     }
-    
-    
+
+
     public function showMyWebsites(Request $r)
     {
         $u=UserManagment::getCurrentUser($r);
@@ -150,12 +179,12 @@ class WebsitesController extends Controller
                 return abort(404);
             }
         }
-        
+
         $ws= Websites::where('user_id',$u->id)->
                 limit(10)->offset($r->input('page',0)*10);
-        $wcount= Websites::select(['websites.user_id'])->where('user_id',$u->id)->count();        
-        
-        
+        $wcount= Websites::select(['websites.user_id'])->where('user_id',$u->id)->count();
+
+
         return view('mywebsites')->with([
             'ws'=>$ws->get(),
             'page'=>$r->input('page',0),
@@ -164,5 +193,5 @@ class WebsitesController extends Controller
             'point'=>$u->point
         ]);
     }
-    
+
 }

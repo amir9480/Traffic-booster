@@ -13,10 +13,10 @@
 
 <body>
     <div id='page_base'>
-            
-        
+
+
             @yield('page_body')
-    
+
 
 <div class='container' id="home_footer_layout">
     <br>
@@ -52,7 +52,7 @@
     <br>
     <span>&copy; Copy Right . All right reserved for traffic booster . 2017</span>
 </div>
-            
+
     <div id='mobile_menu_bar'>
         <ul>
             @yield('main_menu')
@@ -72,12 +72,13 @@
             @yield('main_menu')
         </ul>
     </div>
-            
+
     <script src="{{ asset('jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('bootstrap/css/bootstrap.min.js')}}"></script>
     <script src="{{ asset('js/script01.js')}}"></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
     @yield('page_footer')
-    
+
     </div>
     @yield('page_body2',' ')
 </body>

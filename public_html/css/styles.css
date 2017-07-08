@@ -12,6 +12,7 @@
 
 
 
+
 html,body{
     font-family: shabnam , arial;
     background-color: #00629d;
@@ -63,7 +64,7 @@ html,body{
 #websiteviewer_background {
     width: 100%;
     height: 100%;
-    background:rgba(0,0,0,0.8); 
+    background:rgba(0,0,0,0.8);
     position: fixed;
     top: 0;
     left: 0;
@@ -126,6 +127,8 @@ html,body{
     width: 100%;
     height: 20px;
     text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
 }
 
 #validation_image
@@ -147,7 +150,7 @@ html,body{
 {
     color:#555555;
     font-size: 28pt;
-    
+
 }
 
 @keyframes homeHeaderShadow {
@@ -262,10 +265,10 @@ html,body{
 .home_features
 {
     padding: 10px;
-    background: #60a1c1; 
+    background: #60a1c1;
     background: -moz-radial-gradient(center, ellipse cover, #009fff 0%, #0075ff 100%);
-    background: -webkit-radial-gradient(center, ellipse cover, #009fff 0%,#0075ff 100%); 
-    background: radial-gradient(ellipse at center, #009fff 0%,#0075ff 100%); 
+    background: -webkit-radial-gradient(center, ellipse cover, #009fff 0%,#0075ff 100%);
+    background: radial-gradient(ellipse at center, #009fff 0%,#0075ff 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#009fff', endColorstr='#0075ff',GradientType=1 );
     border: 1px #ffffff;
     border-radius: 4px;
@@ -286,10 +289,10 @@ html,body{
 .home_features_center
 {
     padding: 10px;
-    background: #60a1c1; 
+    background: #60a1c1;
     background: -moz-radial-gradient(center, ellipse cover, #ff8b00 0%, #ff4b00 100%);
-    background: -webkit-radial-gradient(center, ellipse cover, #ff8b00 0%,#ff4b00 100%); 
-    background: radial-gradient(ellipse at center, #ff8b00 0%,#ff4b00 100%); 
+    background: -webkit-radial-gradient(center, ellipse cover, #ff8b00 0%,#ff4b00 100%);
+    background: radial-gradient(ellipse at center, #ff8b00 0%,#ff4b00 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff4b00', endColorstr='#ff8b00',GradientType=1 );
     border: 1px #ffffff;
     border-radius: 4px;
@@ -301,6 +304,7 @@ html,body{
 {
     text-align: right;
 }
+
 
 .home_features_center h3
 {
@@ -460,6 +464,11 @@ html,body{
     text-decoration: none;
 }
 
+#main_menu_bar_float *
+{
+    color:white;
+}
+
 #main_menu_bar_float .active
 {
     background-color: rgba(0,202,255,0.9);
@@ -482,7 +491,7 @@ html,body{
     z-index: 3;
     transition: 0.5s;
     overflow-y: auto;
-    
+
     visibility: hidden;
 }
 
@@ -547,7 +556,7 @@ html,body{
     color:white;
     font-size: 32px;
     transition: 0.5s;
-    
+
     visibility: hidden;
 }
 #mobile_menu_bar_close:hover
@@ -571,7 +580,7 @@ html,body{
     width: 100%;
     height: 100%;
     z-index: 1;
-    
+
     visibility: hidden;
 }
 
@@ -588,7 +597,7 @@ html,body{
     padding: 0px;
     z-index: 2;
     transition: 1.0s;
-    
+
     visibility: hidden;
 }
 
@@ -596,7 +605,7 @@ html,body{
 {
     color: white;
     font-size:40px;
-    
+
     visibility: hidden;
 }
 
@@ -626,12 +635,12 @@ html,body{
     background-size: 100%;
     background-position: center;
 
-    
+
     text-align: right;
-   
-    
+
+
     color:#0075ff;
-    
+
 }
 
 #home_footer_layout *
@@ -712,7 +721,6 @@ html,body{
     visibility: visible;
 }
 
+
+
 }
-
-
-

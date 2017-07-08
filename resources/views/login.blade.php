@@ -19,7 +19,7 @@
 
 @section('page_body')
 <div id='non_home_header_image' class="container">
-    <div style="height: 10px;"></div> 
+    <div style="height: 10px;"></div>
    <h1>افزایش بازدید رایگان سایت شما</h1>
 </div>
 <div class='container main-content' >
@@ -56,13 +56,17 @@
             <div class="col-sm-8"><input class="form-control" type="password" name="password"></div>
         </div>
         <div class="form-group">
+          <div class="col-sm-4"></div>
+          <div class="col-sm-8 g-recaptcha" data-sitekey="6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS"></div>
+        </div>
+        <div class="form-group">
             <div class="col-sm-4"></div>
             <div class="col-sm-8"><input class="btn btn-default" type="submit" value="ورود"></div>
         </div>
 </form>
 </div>
 <br><br><br><br><br><br>
-    
+
 </div>
 </div>
 @endsection
