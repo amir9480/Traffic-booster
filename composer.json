@@ -16,14 +16,11 @@
     },
     "autoload": {
         "classmap": [
-            "database",
+            "database"
         ],
         "psr-4": {
-            "Test\\": "app/",
-        },
-        "files": [
-            "app/external_libs.php"
-        ]
+            "Test\\": "app/"
+        }
     },
     "autoload-dev": {
         "psr-4": {

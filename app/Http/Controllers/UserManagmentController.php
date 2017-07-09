@@ -10,7 +10,8 @@ use Validator;
 use Test\UserManagment;
 use Illuminate\Support\Facades\Hash;
 
-require_once(app_path().'/external_libs.php');
+require_once(app_path().DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'recaptcha'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'autoload.php');
+
 use ReCaptcha\ReCaptcha;
 
 const recaptcha_secret = "6LfaYSgUAAAAAMQtEi8xj8hXnVWxtyzg_Z9L2hLO";
