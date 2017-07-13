@@ -6,30 +6,31 @@ use Illuminate\Database\Eloquent\Model;
 
 use Illuminate\Http\Request;
 
+
 class UserManagment extends Model
 {
     protected $table='user_managment';
     protected $primary='id';
 
-    protected $fillable = array('name','username','email','password','point','loginsession');
+    protected $fillable = array('name','username','email','password','point','usersession');
     public $timestamps=true;
-    
-    
+
+
     public function websites()
     {
         return $this->hasMany('Test\Websites','user_id','id');
     }
-    
+
     public function views()
     {
         return $this->hasMany('Test\WebsiteViews','user_id','id');
     }
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
     public static function getCurrentUser(Request $request)
     {
         if($request->cookie('userid')===null||$request->cookie('usersession')===null)

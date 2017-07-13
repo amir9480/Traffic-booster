@@ -26,6 +26,12 @@ Route::match(['get','post'],'signup','UserManagmentController@signup');
 // ورود
 Route::match(['get','post'],'signin','UserManagmentController@signin');
 
+// تغییر رمز فراموش شده
+Route::match(['get','post'],'passreset','UserManagmentController@passwordReset');
+
+// فرم ارسال لینک ریست پسورد
+Route::match(['get','post'],'passremember','UserManagmentController@passRemeber');
+
 // مشاهده تمام سایت ها
 Route::get('websites','WebsitesController@showWebsites');
 // مشاهده تمام وبسایت های کاربر جهت بروز رسانی

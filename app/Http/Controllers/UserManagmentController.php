@@ -3,7 +3,12 @@
 
 namespace Test\Http\Controllers;
 
+use Test\Mail\RegisterWelcome;
+use Test\Mail\PassReset;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Routing\Redirector;
 
 use Validator;
 
@@ -27,6 +32,7 @@ class UserManagmentController extends Controller
     // این دستور برای زمان ورود میباشد
     public function signin(Request $r)
     {
+
         // اگه هنوز دیتایی فرستاده نشده باشه این دستور فراخوانی بشه
         if($r->isMethod('get'))
         {
@@ -107,9 +113,92 @@ class UserManagmentController extends Controller
             'password'=>Hash::make($r->input('password'))
         ]);
 
+        Mail::to($r->input('email'))->send(new RegisterWelcome($r->input('thename')));
+
         return view('signup')->with([
             'successfull'=>'true'
             ]);
+    }
+
+    public function passwordReset(Request $r)
+    {
+        if($r->isMethod('get'))
+        {
+            if($r->exists('userid')===false || $r->exists('usersession')===false)
+                return abort(404);
+            $v=Validator::make($r->all(),[
+                'userid'=>'numeric'
+            ]);
+            if($v->fails())
+                return abort(404);
+
+            $u = UserManagment::where('id',$r->input('userid'))->first();
+            if($u->usersession != $r->input('usersession'))
+                return abort(404);
+            $r->session()->put('__userid',$r->input('userid'));
+            $r->session()->put('__usersession',$r->input('usersession'));
+            return view('passwordreset');
+        }
+
+        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if($recaptcha_response->isSuccess()===false)
+        {
+          return view('passwordreset')->with([
+            '_r_error'=>true
+                ]);
+        }
+
+        $v=Validator::make($r->all(),[
+            'password'=>'required|max:1024',
+            'passwordr'=>'required|same:password'
+        ]);
+        if($v->fails())
+            return view('passwordreset')->withErrors($v);
+
+        ////////////////////////////////////////////////////
+        $u=UserManagment::where('id', $r->session()->get('__userid'))->first();
+        $u->password = Hash::make($r->input('password'));
+        $u->usersession='0';
+        $u->save();
+
+        $r->session()->forget('__userid');
+        $r->session()->forget('__usersession');
+
+        ////////////////////////////////////////////////////
+        return view('passwordreset')->with([
+                'successfull'=>'true'
+                ]);
+    }
+
+
+    public function passRemeber(Request $r)
+    {
+        if($r->isMethod('get'))
+            return view('passremember');
+        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+        if($recaptcha_response->isSuccess()===false)
+        {
+            return view('passremember')->with([
+            '_r_error'=>true
+            ]);
+        }
+        //if($r->exists('email')==false)
+            //retrun redirect("passremember");
+        $u = UserManagment::where('email',$r->input('email'))->first();
+        if($u==null)
+            return view('passremember')->with([
+                '_email_error'=>true
+            ]);
+        $u->usersession = str_random(16);
+        $u->save();
+
+        Mail::to($u->email)->send(new PassReset($u->username,$u->name,$u->id,$u->usersession) );
+
+        return view('passremember')->with([
+                'successfull'=>'true'
+                ]);
     }
 
 }

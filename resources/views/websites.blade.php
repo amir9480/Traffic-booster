@@ -23,25 +23,25 @@
             <button>button1</button>
             <button>button2</button>
             <button>button3</button>
-            
+
         </div>
-        <div id='websiteviewer_closeButton'><button onclick="hideVBrowser()">X</button></div>
+        <a href="#"><div id='websiteviewer_closeButton'><button onclick="hideVBrowser()">X</button></div></a>
         <div id='websiteviewer_browser'><iframe style='width: 100%;height: 100%;' src=''></iframe></div>
         <div id="website_detials">By:</div>
     </div>
 </div>
 
 <div id='non_home_header_image' class="container">
-    <div style="height: 10px;"></div> 
+    <div style="height: 10px;"></div>
    <h1>افزایش بازدید رایگان سایت شما</h1>
 </div>
 <div class='container main-content'>
     <div id="points">
         <br><br>
-        <span id="pointviewer">امتیاز شما  {{$point}}</span>
+        <span id="pointviewer">امتیاز شما : {{$point}}</span>
         <br><br>
     </div>
-    
+
 <table class='table table-striped'>
     <thead>
     <td>عنوان سایت</td>
@@ -51,12 +51,12 @@
     <tbody>
     @foreach($ws as $website)
         <tr>
-        <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></td> 
+        <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></a></td>
         </tr>
     @endforeach
     </tbody>
 </table>
-@if($pagecount>1)  
+@if($pagecount>1)
     <ul class="pagination">
         @if($page>=1)
             <li><a href="{{$app['url']->to('websites')}}?page={{$page-1}}&rs={{$rs}}">قبلی</a></li>
@@ -68,7 +68,7 @@
                 <li><a href="{{$app['url']->to('websites')}}?page={{$i}}&rs={{$rs}}">{{$i+1}}</a></li>
             @endif
         @endfor
-        
+
         @if($page<$pagecount-1)
             <li><a href="{{$app['url']->to('websites')}}?page={{$page+1}}&rs={{$rs}}">بعدی</a></li>
         @endif

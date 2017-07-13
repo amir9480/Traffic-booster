@@ -30,7 +30,7 @@
     </div>
 
    <h1>افزایش بازدید رایگان سایت شما</h1>
-   <div id='home_header_read_more_button'><a id='home_header_read_more' href='#content_start'>بیشتر بدانید</a></div>
+   <div id='home_header_read_more_button'><a id='home_header_read_more' href='#content_start'> بیشتر بدانید</a></div>
 </div>
 <a name='content_start'></a>
 <br><br><br>

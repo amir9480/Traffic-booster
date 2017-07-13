@@ -11,8 +11,6 @@
 }
 
 
-
-
 html,body{
     font-family: shabnam , arial;
     background-color: #00629d;
@@ -378,7 +376,8 @@ html,body{
     float:right;
     border-left: solid 1px #009fff;
     display: block;
-    width: 80px;
+    min-width: 80px;
+    width:auto;
     text-align: center;
     padding: 14px 10px;
     margin: 0px;

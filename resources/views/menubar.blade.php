@@ -2,6 +2,7 @@
 <a class='main_menubar_link' href='{{$app['url']->to('/')}}'><li @if($active=='home')        class='active' @endif>خانه</li></a>
 <a class='main_menubar_link' href='{{$app['url']->to('/signup')}}'><li @if($active=='sign_up')     class='active' @endif>ثبت نام</li></a>
 <a class='main_menubar_link' href='{{$app['url']->to('/signin')}}'><li @if($active=='sign_in')     class='active' @endif>ورود</li></a>
+<a class='main_menubar_link' href='{{$app['url']->to('/passremember')}}'><li @if($active=='passremember')     class='active' @endif>یادآوری رمز عبور</li></a>
 
 @endif
 
