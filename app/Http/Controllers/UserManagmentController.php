@@ -14,13 +14,13 @@ use Validator;
 
 use Test\UserManagment;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Config;
 
 require_once(app_path().DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'recaptcha'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'autoload.php');
 
 use ReCaptcha\ReCaptcha;
 
-const recaptcha_secret = "6LfaYSgUAAAAAMQtEi8xj8hXnVWxtyzg_Z9L2hLO";
-const recaptcha_site="6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS";
+
 
 class UserManagmentController extends Controller
 {
@@ -38,7 +38,7 @@ class UserManagmentController extends Controller
         {
             return view('login');
         }
-        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_r=new ReCaptcha(Config::get('app.recaptcha_secret'));
         $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if($recaptcha_response->isSuccess()===false)
         {
@@ -78,7 +78,7 @@ class UserManagmentController extends Controller
         }
 
 
-        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_r=new ReCaptcha(Config::get('app.recaptcha_secret'));
         $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if($recaptcha_response->isSuccess()===false)
         {
@@ -140,7 +140,7 @@ class UserManagmentController extends Controller
             return view('passwordreset');
         }
 
-        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_r=new ReCaptcha(Config::get('app.recaptcha_secret'));
         $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if($recaptcha_response->isSuccess()===false)
         {
@@ -176,7 +176,7 @@ class UserManagmentController extends Controller
     {
         if($r->isMethod('get'))
             return view('passremember');
-        $recaptcha_r=new ReCaptcha(recaptcha_secret);
+        $recaptcha_r=new ReCaptcha(Config::get('app.recaptcha_secret'));
         $recaptcha_response = $recaptcha_r->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
         if($recaptcha_response->isSuccess()===false)
         {

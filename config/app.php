@@ -227,4 +227,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     ],
 
+    'recaptcha_secret'=>env('RECAPTCHA_SECRET',' '),
+    'recaptcha_site'=> env('RECAPTCHA_SITE',' '),
+
 ];
