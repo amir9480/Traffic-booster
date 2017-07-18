@@ -36,7 +36,7 @@ class PassReset extends Mailable
      */
     public function build()
     {
-        return $this->view('mails.PassReset')
+        return $this->view('mails.passreset')
         ->subject('افزایش ترافیک رایگان سایت - یادآوری رمز عبور')
         ->with([
             'username'=>    $this->username,
