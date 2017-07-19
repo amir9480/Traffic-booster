@@ -36,6 +36,8 @@ Route::match(['get','post'],'passremember','UserManagmentController@passRemeber'
 Route::get('websites','WebsitesController@showWebsites');
 // مشاهده تمام وبسایت های کاربر جهت بروز رسانی
 Route::get('websites/mywebsites','WebsitesController@showMyWebsites');
+// وبسایت های پسندیده
+Route::get('websites/likedwebsites','WebsitesController@showLiked');
 
 // افزودن سایت جدید
 Route::match(['get','post'],'websites/addwebsite','WebsitesController@addWebsite');
@@ -55,11 +57,12 @@ Route::get('websites/api/submitpoint','WebsiteViewsController@submitPoint');
 // Ajax تصویر اعتبار سنجی
 Route::get('websites/api/current_image.png','WebsiteViewsController@getCurrectImage');
 
+// انجام لایک و پس گرفتن آن
+Route::get('websites/api/togglelike','LikesController@toggleLike');
 
-
-// جهت انجام کانفیگ های لازم . چنانچه به پایان رسید حتما این قسمت کامنت شود
-//Route::get('doconfig/awjawidawoawdinawodnawnoanovawnognwaroira',function()
-//{
-//    Artisan::call('migrate');
-//    echo 'Done!';
-//});
+// جهت انجام کانفیگ های لازم .
+Route::get('doconfig/awjawidawoawdinawodnawnoanovawnognwaroira',function()
+{
+    Artisan::call('migrate');
+    echo 'Done!';
+});

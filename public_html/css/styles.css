@@ -112,6 +112,21 @@ html,body{
     height:20px;
 }
 
+#websiteviewer_likeButton
+{
+    background-color: rgba(0,0,0,0);
+    background-image: url('/images/like_false.png');
+    background-repeat: no-repeat repeat;
+    background-position: center;
+    background-size: 100%;
+
+    position: relative;
+    left:2%;
+    top:24px;
+    width: 30px;
+    height:30px;
+}
+
 #websiteviewer_closeButton > button{
     background-color: #aa0000;
     border: none;

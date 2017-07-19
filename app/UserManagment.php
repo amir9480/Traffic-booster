@@ -26,7 +26,10 @@ class UserManagment extends Model
         return $this->hasMany('Test\WebsiteViews','user_id','id');
     }
 
-
+    public function likes()
+    {
+        return $this->hasMany('Test\Likes','user_id','id');
+    }
 
 
 

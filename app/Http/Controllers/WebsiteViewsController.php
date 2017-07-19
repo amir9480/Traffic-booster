@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Test\WebsiteViews;
 use Test\Websites;
 use Test\UserManagment;
+use Test\Likes;
 
 use Carbon\Carbon;
 
@@ -82,13 +83,19 @@ class WebsiteViewsController extends Controller
         
         $sw = ($u->id==$wd->user_id);
         
+        $liked =!(Likes::where('user_id',$u->id)->where('website_id',$wd->id)->first()===null);
+        
+        $nopoint = ($u->point < $wd->pointpervisit);
+        
         return response()->json([
                 'able'=>$able,
                 'selfwebsite'=>$sw,
                 'weburl'=>$wd->url,
                 'title'=>$wd->title,
                 'user_name'=>$wu->name,
-                'timer'=>(($wd->pointpervisit)/5)
+                'timer'=>(($wd->pointpervisit)/5),
+                'liked'=>$liked,
+                'nopoint'=>$nopoint
             ]);
     }
     

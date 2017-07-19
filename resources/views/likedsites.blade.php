@@ -1,6 +1,6 @@
 @extends('theme')
 
-@section('page_title','افزایش ترافیک سایت  - وبسایت ها')
+@section('page_title','افزایش ترافیک سایت  - وبسایت های مورد علاقه ی من')
 
 @section('page_head')
 
@@ -11,11 +11,10 @@
 @endsection
 
 @section('main_menu')
-    @include('menubar',['type'=>'2','active'=>'websites'])
+    @include('menubar',['type'=>'2','active'=>'liked_websites'])
 @endsection
 
 @section('page_body')
-
 <div id='websiteviewer_background'>
     <div id='websiteviewer_window'>
         <div class='container' id='websiteviewer_browserheader'>
@@ -39,20 +38,19 @@
 <div class='container main-content'>
     <div id="points">
         <br><br>
-        <span id="pointviewer">امتیاز شما : {{$point}}</span>
+        <span id="pointviewer">امتیاز شما  {{$point}}</span>
         <br><br>
     </div>
-
 <table class='table table-striped'>
     <thead>
     <td>عنوان سایت</td>
-    <td>امتیاز</td>
+    <td>امتیاز به ازای هر بازدید</td>
     <td>مشاهده</td>
     </thead>
     <tbody>
     @foreach($ws as $website)
         <tr>
-        <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></a></td>
+            <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></a></td>
         </tr>
     @endforeach
     </tbody>
@@ -60,18 +58,18 @@
 @if($pagecount>1)
     <ul class="pagination">
         @if($page>=1)
-            <li><a href="{{$app['url']->to('websites')}}?page={{$page-1}}&rs={{$rs}}">قبلی</a></li>
+            <li><a href="{{$app['url']->to('websites/likedwebsites')}}?page={{$page-1}}">قبلی</a></li>
         @endif
         @for($i=0;$i<$pagecount;$i++)
             @if($page==$i)
                 <li class="active"><a href="#">{{$i+1}}</a></li>
             @else
-                <li><a href="{{$app['url']->to('websites')}}?page={{$i}}&rs={{$rs}}">{{$i+1}}</a></li>
+                <li><a href="{{$app['url']->to('websites/likedwebsites')}}?page={{$i}}">{{$i+1}}</a></li>
             @endif
         @endfor
 
         @if($page<$pagecount-1)
-            <li><a href="{{$app['url']->to('websites')}}?page={{$page+1}}&rs={{$rs}}">بعدی</a></li>
+            <li><a href="{{$app['url']->to('websites/likedwebsites')}}?page={{$page+1}}">بعدی</a></li>
         @endif
     </ul>
 @endif

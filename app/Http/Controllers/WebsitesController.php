@@ -9,6 +9,7 @@ use Test\Websites;
 use Validator;
 
 use \Test\UserManagment;
+use Test\Likes;
 
 require_once(app_path().DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'recaptcha'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'autoload.php');
 
@@ -72,7 +73,8 @@ class WebsitesController extends Controller
             'successfull'=>'true'
             ]);
     }
-
+    
+    // اصلاح مشخصات یه سایت
     public function editWebsite(Request $r)
     {
         $cu = UserManagment::getCurrentUser($r);
@@ -131,6 +133,7 @@ class WebsitesController extends Controller
             ]);
     }
 
+    // مشاهده وبسایت ها
     public function showWebsites(Request $r)
     {
         if($r->has('rs')||$r->has('page'))
@@ -166,7 +169,7 @@ class WebsitesController extends Controller
         ]);
     }
 
-
+    // مشاهده وبسایت های من
     public function showMyWebsites(Request $r)
     {
         $u=UserManagment::getCurrentUser($r);
@@ -190,6 +193,37 @@ class WebsitesController extends Controller
             'ws'=>$ws->get(),
             'page'=>$r->input('page',0),
             'pagecount'=>((int)($wcount/10))+1,
+            'user_id'=>$u->id,
+            'point'=>$u->point
+        ]);
+    }
+    
+    
+    // مشاهده وبسایت هایی که پسندیده ام
+    public function showLiked(Request $r)
+    {
+        $u=UserManagment::getCurrentUser($r);
+        if($r->has('page'))
+        {
+            $v=Validator::make($r->all(),[
+                'page'=>'numeric'
+                ]);
+            if($v->fails())
+            {
+                return abort(404);
+            }
+        }
+
+        $ws= Websites::whereIn('id',Likes::select(['website_id'])->where('user_id',$u->id)->get())->
+                limit(20)->offset($r->input('page',0)*20);
+        
+        $wcount= Likes::where('user_id',$u->id)->count();
+
+
+        return view('likedsites')->with([
+            'ws'=>$ws->get(),
+            'page'=>$r->input('page',0),
+            'pagecount'=>((int)($wcount/20))+1,
             'user_id'=>$u->id,
             'point'=>$u->point
         ]);

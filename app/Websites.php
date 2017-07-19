@@ -21,4 +21,11 @@ class Websites extends Model
     {
         return $this->hasMany('Test\WebsiteViews','website_id','id');
     }
+    
+    
+    public function likes()
+    {
+        return $this->hasMany('Test\Likes','website_id','id');
+    }
+    
 }

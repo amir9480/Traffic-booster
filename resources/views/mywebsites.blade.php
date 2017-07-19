@@ -7,7 +7,7 @@
 @endsection
 
 @section('page_footer')
-
+    <script src="{{ asset('js/websites.js')}}"></script>
 @endsection
 
 @section('main_menu')
@@ -15,6 +15,21 @@
 @endsection
 
 @section('page_body')
+<div id='websiteviewer_background'>
+    <div id='websiteviewer_window'>
+        <div class='container' id='websiteviewer_browserheader'>
+            Hello
+            <button>button1</button>
+            <button>button2</button>
+            <button>button3</button>
+
+        </div>
+        <a href="#"><div id='websiteviewer_closeButton'><button onclick="hideVBrowser()">X</button></div></a>
+        <div id='websiteviewer_browser'><iframe style='width: 100%;height: 100%;' src=''></iframe></div>
+        <a href="#"><div title="پسندیدن" id='websiteviewer_likeButton' onclick="toggleLike()"></div></a>
+        <div id="website_detials">By:</div>
+    </div>
+</div>
 
 <div id='non_home_header_image' class="container">
     <div style="height: 10px;"></div>
@@ -31,13 +46,15 @@
     <thead>
     <td>عنوان سایت</td>
     <td>بازدید</td>
+    <td>تعداد پسند</td>
     <td>امتیاز به ازای هر بازدید</td>
     <td>اصلاح</td>
+    <td>مشاهده</td>
     </thead>
     <tbody>
     @foreach($ws as $website)
         <tr>
-            <td>{{$website->title}}</td><td>{{$website->views}}</td><td>{{$website->pointpervisit}}</td><td> <a href="{{$app['url']->to('websites/editwebsite')}}?website_id={{$website->id}}"><button>اصلاح مشخصات</button></a></td>
+            <td>{{$website->title}}</td><td>{{$website->views}}</td><td>{{$website->likes}}</td><td>{{$website->pointpervisit}}</td><td> <a href="{{$app['url']->to('websites/editwebsite')}}?website_id={{$website->id}}"><button>اصلاح مشخصات</button></a></td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} ,true)">مشاهده</button></a></td>
         </tr>
     @endforeach
     </tbody>

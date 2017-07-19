@@ -1,6 +1,7 @@
 
 var btimer;
 var isclosed=true;
+var current_show_id=1;
 var current_site_id;
 var wurl;
 
@@ -38,7 +39,7 @@ function showTester()
             success:function(dr) {
                 if(dr.able==false)
                 {
-                    alert('متاسفانه امکان ثبت امتیاز وجود ندارد. لطفا زرنگ بازی را کنار بگذارید!');
+                    alert('متاسفانه امکان ثبت امتیاز وجود ندارد!');
                     return;
                 }
                 $('#websiteviewer_browserheader').html(`<center>
@@ -53,9 +54,11 @@ function showTester()
         });
 }
 
-function browserTimer()
+function browserTimer(_reset=false)
 {
-    if(isclosed===true)
+    if(_reset===true)
+        browserTimer.csi=current_show_id;
+    if(isclosed===true|| browserTimer.csi!== current_show_id)
         return;
     btimer-=1;
     $('#websiteviewer_browserheader').html(' <center> &nbsp;لطفا&nbsp; '+parseInt(btimer)+' &nbsp;ثانیه صبر کنید&nbsp; </center> ');
@@ -66,19 +69,24 @@ function browserTimer()
 
 }
 
-function showwebsite(weburl,websiteid)
+function showwebsite(weburl,websiteid,watchonly=false)
 {
     $('#websiteviewer_background').css('visibility','visible');
     $('#websiteviewer_browserheader').html('<center>...در حال بارگزاری</center>');
     $('#websiteviewer_browser').html('');
     $('#websiteviewer_background').fadeIn();
     $('#website_detials').html(' ');
+    current_show_id++;
     isclosed=false;
     $.ajax({
             url:weburl+'/websites/api/requestvisit?website_id='+websiteid,
             success:function(dr) {
                 $('#websiteviewer_browser').html('<iframe sandbox=\'\' style=\'width: 100%;height: 100%;\' src=\''+dr.weburl+'\'></iframe>');
-                if(dr.selfwebsite===true)
+                if(watchonly)
+                {
+                    $('#websiteviewer_browserheader').html('<center>'+dr.title+' <a href="'+weburl+'/websites/editwebsite?website_id='+websiteid+'"><button>اصلاح مشخصات</button></a> '+'</center>');
+                }
+                else if(dr.selfwebsite===true)
                 {
                     $('#websiteviewer_browserheader').html('<center> این وبسایت توسط خود شما ثبت شده است </center>');
                 }
@@ -86,16 +94,55 @@ function showwebsite(weburl,websiteid)
                 {
                     $('#websiteviewer_browserheader').html('<center>شما اخیرا از این سایت بازدید کرده اید . لطفا بعدا تلاش کنید</center>');
                 }
+                else if(dr.nopoint===true)
+                {
+                    $('#websiteviewer_browserheader').html('<center>متاسفانه مقدار امتیاز صاحب سایت برای دریافت امتیاز شما کافی نیست</center>');
+                }
                 else
                 {
                     $('#websiteviewer_browserheader').html('<center> &nbsp;لطفا&nbsp; '+parseInt(dr.timer)+'&nbsp;ثانیه صبر کنید &nbsp;</center>');
-                    setTimeout(browserTimer,1000);
+                    setTimeout(function(){browserTimer(true);},1000);
                 }
                 btimer=dr.timer;
                 current_site_id=websiteid;
                 wurl=weburl;
+                if(dr.liked)
+                {
+                    $("#websiteviewer_likeButton").css('background-image',' url(\'/images/like_true.png\')');
+                    $("#websiteviewer_likeButton").attr('title','حزف پسندیدن');
+                }
+                else
+                {
+                    $("#websiteviewer_likeButton").css('background-image',' url(\'/images/like_false.png\')');
+                    $("#websiteviewer_likeButton").attr('title','پسندیدن');
+                }
                 $("#website_detials").html('<span>  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | &nbsp;'+dr.title+' &nbsp; '+dr.user_name+'</span>');
             }
     });
 
 }
+
+function toggleLike()
+{
+    $.ajax({
+        url:wurl+'/websites/api/togglelike?websiteid='+current_site_id,
+        success:function(dr)
+        {
+            if(dr.website_id===current_site_id)
+            {
+                if(dr.liked)
+                {
+                    $("#websiteviewer_likeButton").css('background-image',' url(\'/images/like_true.png\')');
+                    $("#websiteviewer_likeButton").attr('title','حزف پسندیدن');
+                }
+                else
+                {
+                    $("#websiteviewer_likeButton").css('background-image',' url(\'/images/like_false.png\')');
+                    $("#websiteviewer_likeButton").attr('title','پسندیدن');
+                }
+            }
+        }
+    });
+}
+
+
