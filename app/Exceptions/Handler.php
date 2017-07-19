@@ -44,6 +44,13 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if($this->isHttpException($exception))
+        {
+            if(view()->exists('errorpages.'.$exception->getStatusCode()))
+            {
+                return response()->view('errorpages.'.$exception->getStatusCode());
+            }
+        }
         return parent::render($request, $exception);
     }
 
@@ -62,4 +69,7 @@ class Handler extends ExceptionHandler
 
         return redirect()->guest(route('login'));
     }
+
+
+
 }
