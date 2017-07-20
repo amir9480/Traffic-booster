@@ -50,6 +50,7 @@ class Handler extends ExceptionHandler
             {
                 return response()->view('errorpages.'.$exception->getStatusCode());
             }
+            return response()->view('errorpages.error');
         }
         return parent::render($request, $exception);
     }
