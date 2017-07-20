@@ -112,6 +112,14 @@ html,body{
     height:20px;
 }
 
+@keyframes heartMove {
+    0% { transform: scale(1);}
+    40% {transform: scale(1.36);}
+    50% { transform: scale(1);}
+    80% {transform: scale(1.3);}
+    100% {transform: scale(1);}
+}
+
 #websiteviewer_likeButton
 {
     background-color: rgba(0,0,0,0);
@@ -125,6 +133,11 @@ html,body{
     top:24px;
     width: 30px;
     height:30px;
+    
+    
+    animation-name: heartMove;
+    animation-duration: 0.8s;
+    animation-iteration-count: infinite;
 }
 
 #websiteviewer_closeButton > button{

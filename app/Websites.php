@@ -28,4 +28,10 @@ class Websites extends Model
         return $this->hasMany('Test\Likes','website_id','id');
     }
     
+    
+    public static function lastestSites($howmany=4)
+    {
+        return Websites::orderBy('created_at','desc')->limit($howmany)->get();
+    }
+    
 }

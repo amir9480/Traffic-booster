@@ -24,10 +24,10 @@
         <div class="col-sm-4">
             <h4>آخرین سایت های ثبت شده</h4>
             <ul>
-                <li><a href='#'>A1</a></li>
-                <li><a href='#'>A2</a></li>
-                <li><a href='#'>A3</a></li>
-                <li><a href='#'>A4</a></li>
+                <?php $_lastest_websites = Test\Websites::lastestSites(4); ?>
+                @foreach($_lastest_websites as $_lw)
+                <li><a href="{{ $_lw->url }}" target="_blank">{{ $_lw->title }}</a></li>
+                @endforeach
             </ul>
         </div>
         <div class="col-sm-4">
