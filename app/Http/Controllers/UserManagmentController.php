@@ -132,7 +132,7 @@ class UserManagmentController extends Controller
                 return abort(404);
 
             $u = UserManagment::where('id',$r->input('userid'))->first();
-            if($u->usersession != $r->input('usersession'))
+            if($u->usersession != $r->input('usersession') || $u->usersession=='0')
                 return abort(404);
             $r->session()->put('__userid',$r->input('userid'));
             $r->session()->put('__usersession',$r->input('usersession'));
