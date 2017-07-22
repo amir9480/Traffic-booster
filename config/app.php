@@ -176,7 +176,8 @@ return [
         // Test\Providers\BroadcastServiceProvider::class,
         Test\Providers\EventServiceProvider::class,
         Test\Providers\RouteServiceProvider::class,
-
+        
+        Test\Providers\UsernameValidationRole::class,
     ],
 
     /*

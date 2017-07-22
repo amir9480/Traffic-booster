@@ -91,8 +91,8 @@ class UserManagmentController extends Controller
 
         $v=Validator::make($r->all(),[
             'thename'=>'required|max:255',
-            'username'=>'required|max:255|unique:user_managment,username',
-            'email'=>'required|max:1024|unique:user_managment,email',
+            'username'=>'required|max:255|user_name|unique:user_managment,username',
+            'email'=>'required|max:1024|email|unique:user_managment,email',
             'password'=>'required|max:1024',
             'passwordr'=>'required|same:password'
         ]);
