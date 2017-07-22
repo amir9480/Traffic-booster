@@ -58,5 +58,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'usersonly' => \Test\Http\Middleware\UserManagmentMiddle::class,
         'nonusersonly' => \Test\Http\Middleware\nonusersonly::class,
+        'adminsonly'=>\Test\Http\Middleware\admins_only::class,
     ];
 }

@@ -691,6 +691,29 @@ html,body{
 }
 
 
+
+.admin_bar{
+    list-style:none;
+    display: block;
+    background-color: #555555;
+    color: white;
+    width: 20%;
+    margin-top:  2px;
+    margin-left: 40%;
+}
+.admin_bar *
+{
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+.admin_bar:hover *
+{
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
 /*******************************************************************************/
 
 @media(max-width:1024px)

@@ -1,7 +1,7 @@
 
 @extends('../theme')
 
-@section('page_title','افزایش ترافیک سایت - خطا')
+@section('page_title','افزایش ترافیک سایت - مدیریت')
 
 @section('page_head')
 
@@ -11,6 +11,9 @@
 
 @endsection
 
+@section('main_menu')
+    @include('menubar',['type'=>'2','active'=>'admin'])
+@endsection
 
 @section('page_body')
 <div id='non_home_header_image' class="container">
@@ -18,14 +21,6 @@
    <h1>افزایش بازدید رایگان سایت شما</h1>
 </div>
 <div class='container main-content'>
-<div style='text-align:right;'>
-
-    <h2>خطای 500 : خطای داخلی سرور رخ داده است</h2><br>
-    <h4><a href="{{$app['url']->to('/')}}">بازگشت به سایت</a></h4>
-
-</div>
-</div>
-    <br><br><br>
+    @include('admin.adminbar')
 </div>
 @endsection
-

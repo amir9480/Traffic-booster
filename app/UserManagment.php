@@ -12,7 +12,7 @@ class UserManagment extends Model
     protected $table='user_managment';
     protected $primary='id';
 
-    protected $fillable = array('name','username','email','password','point','usersession');
+    protected $fillable = array('name','username','email','password','point','usersession','is_admin');
     public $timestamps=true;
 
 

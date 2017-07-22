@@ -52,7 +52,7 @@
     <tbody>
     @foreach($ws as $website)
         <tr>
-        <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></a></td>
+        <td>{{$website->title}}</td><td>{{$website->pointpervisit}}</td><td><a href="javascript:void(0)"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} )">مشاهده</button></a></td>
         </tr>
     @endforeach
     </tbody>

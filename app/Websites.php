@@ -9,7 +9,7 @@ class Websites extends Model
     protected $table='websites';
     protected $primary='id';
 
-    protected $fillable = array('user_id','title','url','pointpervisit','views');
+    protected $fillable = array('user_id','title','url','pointpervisit','views','likes');
     public $timestamps=true;
 
     public function user()

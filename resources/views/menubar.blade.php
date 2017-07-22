@@ -12,5 +12,7 @@
 <a class='main_menubar_link' href='{{$app['url']->to('/websites/mywebsites')}}'><li @if($active=='my_websites')     class='active' @endif> وبسایت های من</li></a>
 <a class='main_menubar_link' href='{{$app['url']->to('/websites/likedwebsites')}}'><li @if($active=='liked_websites')     class='active' @endif> وبسایت های مورد علاقه ی من</li></a>
 <a class='main_menubar_link' href='{{$app['url']->to('/logout')}}'><li>خروج از ناحیه ی کاربری</li></a>
-
+@if(Test\UserManagment::getCurrentUser(Request::instance())->is_admin==1)
+<a class="main_menubar_link" href="{{$app['url']->to('/admin')}}"><li @if($active=='admin') class='active' @endif>ناحیه ی مدیریت</li></a>
+@endif
 @endif

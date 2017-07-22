@@ -47,7 +47,6 @@ class UserManagmentController extends Controller
                   ]);
         }
 
-
         $v=Validator::make($r->all(),[
             'username'=>'required|max:255|exists:user_managment,username',
             'password'=>'required|max:1024'

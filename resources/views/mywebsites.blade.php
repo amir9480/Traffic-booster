@@ -54,7 +54,7 @@
     <tbody>
     @foreach($ws as $website)
         <tr>
-            <td>{{$website->title}}</td><td>{{$website->views}}</td><td>{{$website->likes}}</td><td>{{$website->pointpervisit}}</td><td> <a href="{{$app['url']->to('websites/editwebsite')}}?website_id={{$website->id}}"><button>اصلاح مشخصات</button></a></td><td><a href="#"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} ,true)">مشاهده</button></a></td>
+            <td>{{$website->title}}</td><td>{{$website->views}}</td><td>{{$website->likes}}</td><td>{{$website->pointpervisit}}</td><td> <a href="{{$app['url']->to('websites/editwebsite')}}?website_id={{$website->id}}"><button>اصلاح مشخصات</button></a></td><td><a href="javascript:void(0)"><button onclick="showwebsite('{{$app['url']->to('/')}}',{{$website->id}} ,true)">مشاهده</button></a></td>
         </tr>
     @endforeach
     </tbody>

@@ -60,6 +60,25 @@ Route::get('websites/api/current_image.png','WebsiteViewsController@getCurrectIm
 // انجام لایک و پس گرفتن آن
 Route::get('websites/api/togglelike','LikesController@toggleLike');
 
+
+Route::get('admin','WebAdmin@home');
+
+Route::get('admin/users','WebAdmin@users');
+
+Route::match(['get','post'],'admin/users/edit/{userid}','WebAdmin@showUserEdit');
+
+Route::match(['get','post'],'admin/users/remove/{userid}','WebAdmin@showUserRemove');
+
+Route::get('admin/websites/','WebAdmin@websites');
+
+Route::match(['get','post'],'admin/websites/edit/{websiteid}','WebAdmin@showWebEdit');
+
+Route::match(['get','post'],'admin/websites/remove/{websiteid}','WebAdmin@showWebRemove');
+
+Route::match(['get','post'],'admin/websites/removeall/{websiteid}','WebAdmin@showWebAllRemove');
+
+Route::match(['get','post'],'admin/hashcreator','WebAdmin@showHashCreator');
+
 // جهت انجام کانفیگ های لازم .
 Route::get('doconfig/awjawidawoawdinawodnawnoanovawnognwaroira',function()
 {
