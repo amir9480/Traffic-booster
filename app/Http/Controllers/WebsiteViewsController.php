@@ -8,10 +8,16 @@ use Test\WebsiteViews;
 use Test\Websites;
 use Test\UserManagment;
 use Test\Likes;
+use Test\Comments;
 
 use Carbon\Carbon;
-
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Config;
+
+
+require_once(app_path().DIRECTORY_SEPARATOR.'libs'.DIRECTORY_SEPARATOR.'recaptcha'.DIRECTORY_SEPARATOR.'src'.DIRECTORY_SEPARATOR.'autoload.php');
+
+use ReCaptcha\ReCaptcha;
 
 // آیکون ها و اسم های آن ها
 const icon_images=
@@ -177,9 +183,9 @@ class WebsiteViewsController extends Controller
         // Just for Testing
         $r->session()->forget('current_selection');
         
-        header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
-        header("Cache-Control: post-check=0, pre-check=0", false);
-        header("Pragma: no-cache");
+        $r->header('Cache-Control: no-store, no-cache, must-revalidate, max-age=0');
+        $r->header("Cache-Control: post-check=0, pre-check=0", false);
+        $r->header("Pragma: no-cache");
         
         return response()->file(icon_images[$s]['file']);
     }
@@ -220,6 +226,61 @@ class WebsiteViewsController extends Controller
                 'text'=>'تبریک . شما '.$website->pointpervisit.' امتیاز کسب کردید',
                 'point'=>$uc->point
                 ]);
+    }
+    
+    
+    public function getComments(Request $r,$website_id)
+    {
+        $cuser = UserManagment::getCurrentUser($r);
+        $comments = Comments::select(['id','user_id','content'])->where('website_id',$website_id)->orderBy('created_at','desc')->get();
+        $users = array();
+        foreach ($comments as $c)
+        {
+            $users[]=UserManagment::select(['name'])->where('id',$c->user_id)->first();
+        }
+        $cweb = Websites::where('id',$website_id)->first();
+        
+        return response()->json([
+                    'comments'=>$comments,
+                    'users'=>$users,
+                    'current_user_id'=>$cuser->id,
+                    'ownwebsite'=> ((bool)($cweb->user_id == $cuser->id))
+                ]);
+    }
+    
+    public function addComment(Request $r)
+    {
+        $recaptcha_r=new ReCaptcha(Config::get('app.recaptcha_secret'));
+        $recaptcha_response = $recaptcha_r->verify($r->input('g-recaptcha-response'), $_SERVER['REMOTE_ADDR']);
+        if($recaptcha_response->isSuccess()===false || empty($r->input('content','')))
+        {
+            return response()->json([
+                   'done'=>false
+                  ]);
+        }
+        $cuser = UserManagment::getCurrentUser($r);
+        Comments::create(['website_id'=>$r->input('website_id'),'user_id'=>$cuser->id,'content'=>$r->input('content')]);
+        
+        return response()->json([
+                  'done'=>true
+                  ]);
+    }
+    
+    public function deleteComment(Request $r)
+    {
+        $cuser = UserManagment::getCurrentUser($r);
+        $com = Comments::where('id',$r->input('cid'))->first();
+        $w = Websites::where('id',$com->website_id)->first();
+        if($com->user_id != $cuser->id && $w->user_id != $cuser->id && $com->is_admin==false)
+        {
+            return response()->json([
+                  'done'=>false
+                  ]);
+        }
+        $com->delete();
+        return response()->json([
+                  'done'=>true
+                  ]);
     }
     
     

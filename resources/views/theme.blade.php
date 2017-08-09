@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,intial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel='stylesheet' href='{{asset('bootstrap/css/bootstrap.min.css')}}'>
     <link rel='stylesheet' href='{{asset('bootstrap/css/bootstrap-theme.min.css')}}'>
     <link rel='stylesheet' href='{{asset('css/styles.css')}}'>
@@ -75,8 +76,10 @@
 
     <script src="{{ asset('jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('bootstrap/css/bootstrap.min.js')}}"></script>
-    <script src="{{ asset('js/script01.js')}}"></script>
     <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=fa&render=explicit'></script>
+    
+    <script src="{{ asset('js/script01.js')}}"></script>
     @yield('page_footer')
 
     </div>

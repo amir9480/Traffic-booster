@@ -4,6 +4,7 @@ var isclosed=true;
 var current_show_id=1;
 var current_site_id;
 var wurl;
+var comment_recapcha_id;
 
 function hideVBrowser()
 {
@@ -74,6 +75,8 @@ function showwebsite(weburl,websiteid,watchonly=false)
     $('#websiteviewer_background').css('visibility','visible');
     $('#websiteviewer_browserheader').html('<center>...در حال بارگزاری</center>');
     $('#websiteviewer_browser').html('');
+    $("#websiteviewer_browser").css('display','block');
+    $("#websiteviewer_comments").css('display','none');
     $('#websiteviewer_background').fadeIn();
     $('#website_detials').html(' ');
     current_show_id++;
@@ -146,3 +149,111 @@ function toggleLike()
 }
 
 
+
+function tabShowComments()
+{
+    $("#websiteviewer_browser").css('display','none');
+    $("#websiteviewer_comments").css('display','block');
+    
+    $("#websiteviewer_comments").html('<center>...در حال بارگزاری</center>');
+    loadComments();
+}
+
+function tabShowWebsite()
+{
+    $("#websiteviewer_browser").css('display','block');
+    $("#websiteviewer_comments").css('display','none');
+}
+
+var _rc;
+
+function loadComments()
+{
+    $.ajax({
+        url:wurl+'/websites/api/comments/'+current_site_id,
+        success:function(dr){
+            
+            $('#websiteviewer_comments').html('');
+            $('#websiteviewer_comments').append(`<div id="your_comment_div"><form onsubmit="postComment()" action="`+wurl+`" method="post"><textarea placeholder="نظر شما" id="your_comment_content"></textarea><div id="__google_recaptcha"></div><input onclick="postComment(event)" type="submit" value="ارسال نظر"></form></div>`);
+            comment_recapcha_id=grecaptcha.render('__google_recaptcha',{'sitekey':'6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS'});
+            _rc=grecaptcha;
+            $('#websiteviewer_comments').append(`</div>`);
+            for(var i=0;i<dr.comments.length;i++)
+            {
+                var str = dr.users[i].name + ' میگه : ' + dr.comments[i].content;
+                if(dr.ownwebsite || dr.comments[i].user_id == dr.current_user_id )
+                {
+                    str+='<a href="javascript:void(0)"><button onclick="deleteComment('+dr.comments[i].id+')"> حزف </button></a>';
+                }
+                $('#websiteviewer_comments').append('<div class="websiteviewer_thecommentblock" >'+str+'</div><br>' );
+            }
+        }
+    });
+}
+
+function postComment(e)
+{
+    e.preventDefault();
+    if(_rc==null)
+    {
+        alert('انجام نشد');
+        return false;
+    }
+    console.log(_rc);
+    var rr = _rc.getResponse();
+    
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+     $.ajax({
+        type: "POST",
+        url:wurl+'/website/api/comments/add',
+        data:{'g-recaptcha-response':rr,"website_id":current_site_id,"content":$("#your_comment_content").val()},
+        success:function(dr){
+            if(dr.done===true)
+            {
+                alert('نظر شما ثبت شد');
+                loadComments();
+            }
+            else
+            {
+                alert('متاسفانه مشکلی وجود دارد.نظر شما ثبت نشد. مطمئن شوید محتوای نظر شما خالی نیست و گزینه ی من یک ربات نیستم را تایید کرده اید');
+                _rc.reset();
+            }
+        },
+        error: function(data)
+        {
+            alert('متاسفانه مشکلی در ارتباط با سرور وجود دارد. نظر شما ثبت نشده است.');
+        }
+    });
+    alert('... لطفا کمی صبر کنید');
+    return false;
+}
+
+
+function deleteComment(comment_id)
+{
+    var _con = confirm('آیا برای  حزف این نظر مطمئن هستید؟');
+    if(_con==false)
+        return;
+    $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+    });
+    
+    $.ajax({
+        url:wurl+'/website/api/comments/delete',
+        type:"post",
+        data:{"cid":comment_id},
+        success:function(dr){
+            if(dr.done==true)
+                alert('حزف شد');
+            else
+                alert('مشکلی در حزف وجود دارد');
+            loadComments();
+        }
+    });
+}

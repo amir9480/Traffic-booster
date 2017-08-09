@@ -25,6 +25,8 @@
 
         </div>
         <a href="#"><div id='websiteviewer_closeButton'><button onclick="hideVBrowser()">X</button></div></a>
+        <div id='websiteviewer_tabs'><button id="websiteviewer_button_website" onclick="tabShowWebsite()">سایت</button><button id="websiteviewer_button_comments"  onclick="tabShowComments()">نظرات</button></div>
+        <div id='websiteviewer_comments'>نظرات سایت</div>
         <div id='websiteviewer_browser'><iframe style='width: 100%;height: 100%;' src=''></iframe></div>
         <a href="#"><div title="پسندیدن" id='websiteviewer_likeButton' onclick="toggleLike()"></div></a>
         <div id="website_detials">By:</div>

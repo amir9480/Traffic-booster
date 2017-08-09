@@ -28,6 +28,10 @@ class Websites extends Model
         return $this->hasMany('Test\Likes','website_id','id');
     }
     
+    public function comments()
+    {
+        return $this->hasMany('Test\Comments','website_id','id');
+    }
     
     public static function lastestSites($howmany=4)
     {

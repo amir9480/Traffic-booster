@@ -30,7 +30,10 @@ class UserManagment extends Model
     {
         return $this->hasMany('Test\Likes','user_id','id');
     }
-
+    public function comments()
+    {
+        return $this->hasMany('Test\Comment','user_id','id');
+    }
 
 
 

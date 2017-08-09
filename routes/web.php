@@ -60,24 +60,55 @@ Route::get('websites/api/current_image.png','WebsiteViewsController@getCurrectIm
 // انجام لایک و پس گرفتن آن
 Route::get('websites/api/togglelike','LikesController@toggleLike');
 
+// تهیه نظرات کاربران در مورد یک وبسایت
+Route::get('websites/api/comments/{website_id}','WebsiteViewsController@getComments')
+        ->where(['website_id'=>'[0-9]+']);
 
+// اضافه کردن یه نظر جدید
+Route::post('website/api/comments/add','WebsiteViewsController@addComment');
+
+// حزف یه نظر
+Route::post('website/api/comments/delete','WebsiteViewsController@deleteComment');
+
+// صفحه اصلی پنل ادمین
 Route::get('admin','WebAdmin@home');
 
+// پنل ادمین لیست کاربران
 Route::get('admin/users','WebAdmin@users');
 
+// اصلاح کاربر
 Route::match(['get','post'],'admin/users/edit/{userid}','WebAdmin@showUserEdit');
 
+// حزف کاربر
 Route::match(['get','post'],'admin/users/remove/{userid}','WebAdmin@showUserRemove');
 
+// پنل ادمین لیست وبسایت ها
 Route::get('admin/websites/','WebAdmin@websites');
 
+// اصلاح وبسایت
 Route::match(['get','post'],'admin/websites/edit/{websiteid}','WebAdmin@showWebEdit');
 
+// حزف وبسایت
 Route::match(['get','post'],'admin/websites/remove/{websiteid}','WebAdmin@showWebRemove');
 
+// حزف تمام وبسایت های کاربر
 Route::match(['get','post'],'admin/websites/removeall/{websiteid}','WebAdmin@showWebAllRemove');
 
+// صفحه ساخت هش
 Route::match(['get','post'],'admin/hashcreator','WebAdmin@showHashCreator');
+
+
+// پنل ادمین لیست نظرات
+Route::get('/admin/comments','WebAdmin@showComments');
+
+// اصلاح کامنت
+Route::match(['get','post'],'admin/comments/edit/{commentid}','WebAdmin@showCommentEdit');
+
+// حزف کامنت
+Route::match(['get','post'],'admin/comments/remove/{commentid}','WebAdmin@showCommentRemove');
+
+// حزف تمام کامنت های کاربر
+Route::match(['get','post'],'admin/comments/removeall/{commentid}','WebAdmin@showCommentAllRemove');
 
 // جهت انجام کانفیگ های لازم .
 Route::get('doconfig/awjawidawoawdinawodnawnoanovawnognwaroira',function()

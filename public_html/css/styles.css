@@ -94,6 +94,57 @@ html,body{
     height:20px;
     text-align:center;
 }
+#websiteviewer_tabs
+{
+    position: relative;
+    left:1%;
+    top:0px;
+    width: 98%;
+    height:5%;
+}
+#websiteviewer_tabs *
+{
+    margin:4px;
+}
+#websiteviewer_comments
+{
+    position: relative;
+    left:1%;
+    top:22px;
+    width: 98%;
+    height:74%;
+    display: none;
+}
+
+.websiteviewer_thecommentblock
+{
+    background-color: #eeefff;
+    width: 90%;
+    left: 5%;
+    text-align: right;
+    float:left;
+    display: inline-block;
+}
+
+#your_comment_content
+{
+    width: 90%;
+    left: 5%;
+    resize: none;
+    text-align: right;
+}
+
+#your_comment_div
+{
+    text-align: right;
+    right: 0px;
+}
+#your_comment_div *
+{
+    text-align: right;
+    right: 0px;
+    float:right;
+}
 
 #websiteviewer_browser
 {
@@ -101,7 +152,8 @@ html,body{
     left:1%;
     top:22px;
     width: 98%;
-    height:80%;
+    height:74%;
+    display: block;
 }
 
 #websiteviewer_closeButton{
