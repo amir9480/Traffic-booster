@@ -77,7 +77,7 @@
     <script src="{{ asset('jquery/jquery-3.2.1.min.js')}}"></script>
     <script src="{{ asset('bootstrap/css/bootstrap.min.js')}}"></script>
     <script src='https://www.google.com/recaptcha/api.js?hl=fa'></script>
-    <script src='https://www.google.com/recaptcha/api.js?hl=fa&render=explicit'></script>
+    <script src='https://www.google.com/recaptcha/api.js?hl=fa&render=explicit&onload=onRecaptchaLoad'></script>
     
     <script src="{{ asset('js/script01.js')}}"></script>
     @yield('page_footer')

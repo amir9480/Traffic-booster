@@ -165,8 +165,6 @@ function tabShowWebsite()
     $("#websiteviewer_comments").css('display','none');
 }
 
-var _rc;
-
 function loadComments()
 {
     $.ajax({
@@ -176,11 +174,10 @@ function loadComments()
             $('#websiteviewer_comments').html('');
             $('#websiteviewer_comments').append(`<div id="your_comment_div"><form onsubmit="postComment()" action="`+wurl+`" method="post"><textarea placeholder="نظر شما" id="your_comment_content"></textarea><div id="__google_recaptcha"></div><input onclick="postComment(event)" type="submit" value="ارسال نظر"></form></div>`);
             comment_recapcha_id=grecaptcha.render('__google_recaptcha',{'sitekey':'6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS'});
-            _rc=grecaptcha;
             $('#websiteviewer_comments').append(`</div>`);
             for(var i=0;i<dr.comments.length;i++)
             {
-                var str = dr.users[i].name + ' میگه : ' + dr.comments[i].content;
+                var str = '<span dir="rtl">'+dr.users[i].name + ' میگه : ' + dr.comments[i].content+'</span>';
                 if(dr.ownwebsite || dr.comments[i].user_id == dr.current_user_id )
                 {
                     str+='<a href="javascript:void(0)"><button onclick="deleteComment('+dr.comments[i].id+')"> حزف </button></a>';
@@ -194,13 +191,13 @@ function loadComments()
 function postComment(e)
 {
     e.preventDefault();
-    if(_rc==null)
+    console.log(grecaptcha);
+    if(grecaptcha==null)
     {
         alert('انجام نشد');
         return false;
     }
-    console.log(_rc);
-    var rr = _rc.getResponse();
+    var rr = grecaptcha.getResponse(comment_recapcha_id);
     
     $.ajaxSetup({
     headers: {
@@ -215,12 +212,13 @@ function postComment(e)
             if(dr.done===true)
             {
                 alert('نظر شما ثبت شد');
+                grecaptcha.reset();
                 loadComments();
             }
             else
             {
                 alert('متاسفانه مشکلی وجود دارد.نظر شما ثبت نشد. مطمئن شوید محتوای نظر شما خالی نیست و گزینه ی من یک ربات نیستم را تایید کرده اید');
-                _rc.reset();
+                grecaptcha.reset();
             }
         },
         error: function(data)
