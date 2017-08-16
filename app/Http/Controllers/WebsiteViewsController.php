@@ -62,6 +62,8 @@ class WebsiteViewsController extends Controller
         }
         $wd = Websites::where('id',$w->website_id)->first();
         
+        $webowner = $wd->user;
+        
         // اگه وبسایت مورد نظر یا کاربر مورد نظر وجود نداشته حتما یه خراب کاری وجود داره
         if($wd===null or $u === null)
         {
@@ -85,13 +87,13 @@ class WebsiteViewsController extends Controller
             $w->save();
         }
         
-        $wu = UserManagment::select(['name'])->where('id',$wd->user_id)->first();
+        $wu = UserManagment::select(['name','username'])->where('id',$wd->user_id)->first();
         
         $sw = ($u->id==$wd->user_id);
         
         $liked =!(Likes::where('user_id',$u->id)->where('website_id',$wd->id)->first()===null);
         
-        $nopoint = ($u->point < $wd->pointpervisit);
+        $nopoint = (bool)($webowner->point < $wd->pointpervisit);
         
         return response()->json([
                 'able'=>$able,
@@ -99,7 +101,9 @@ class WebsiteViewsController extends Controller
                 'weburl'=>$wd->url,
                 'title'=>$wd->title,
                 'user_name'=>$wu->name,
+                'the_user_name'=>$wu->username,
                 'timer'=>(($wd->pointpervisit)/5),
+                'thepoint'=>$wd->pointpervisit,
                 'liked'=>$liked,
                 'nopoint'=>$nopoint
             ]);

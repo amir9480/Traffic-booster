@@ -228,5 +228,39 @@ class WebsitesController extends Controller
             'point'=>$u->point
         ]);
     }
+    
+    
+
+    // مشاهده تمام وبسایت های کاربر
+    public function showUserProfile(Request $r,$user_name)
+    {
+        $user = UserManagment::where('username',$user_name)->first();
+        if($user==null)
+            return abort(404);
+        
+        if($r->has('page'))
+        {
+            $v=Validator::make($r->all(),[
+                'page'=>'numeric'
+                ]);
+            if($v->fails())
+            {
+                return abort(404);
+            }
+        }
+
+        $ws= Websites::where('user_id',$user->id)->
+                limit(10)->offset($r->input('page',0)*10);
+        $wcount= Websites::select(['websites.user_id'])->where('user_id',$user->id)->count();
+
+
+        return view('userprofile')->with([
+            'ws'=>$ws->get(),
+            'page'=>$r->input('page',0),
+            'pagecount'=>((int)($wcount/10))+1,
+            'user'=>$user,
+            'point'=> UserManagment::getCurrentUser($r)->point
+        ]);
+    }
 
 }

@@ -93,6 +93,10 @@ function showwebsite(weburl,websiteid,watchonly=false)
                 {
                     $('#websiteviewer_browserheader').html('<center> این وبسایت توسط خود شما ثبت شده است </center>');
                 }
+                else if(dr.thepoint<=0)
+                {
+                    $('#websiteviewer_browserheader').html('<center> امتیازی جهت کسب کردن وجود ندارد</center>');
+                }
                 else if(dr.able===false)
                 {
                     $('#websiteviewer_browserheader').html('<center>شما اخیرا از این سایت بازدید کرده اید . لطفا بعدا تلاش کنید</center>');
@@ -119,7 +123,7 @@ function showwebsite(weburl,websiteid,watchonly=false)
                     $("#websiteviewer_likeButton").css('background-image',' url(\'/images/like_false.png\')');
                     $("#websiteviewer_likeButton").attr('title','پسندیدن');
                 }
-                $("#website_detials").html('<span>  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | &nbsp;'+dr.title+' &nbsp; '+dr.user_name+'</span>');
+                $("#website_detials").html('<span dir="rtl">  <a target="_blank" href="'+dr.weburl+'">'+dr.weburl+'</a> | &nbsp;'+dr.title+' &nbsp; <a target="_blank" href="'+weburl+'/user/'+dr.the_user_name+'">'+dr.user_name+'</a></span>');
             }
     });
 
@@ -172,7 +176,7 @@ function loadComments()
         success:function(dr){
             
             $('#websiteviewer_comments').html('');
-            $('#websiteviewer_comments').append(`<div id="your_comment_div"><form onsubmit="postComment()" action="`+wurl+`" method="post"><textarea placeholder="نظر شما" id="your_comment_content"></textarea><div id="__google_recaptcha"></div><input onclick="postComment(event)" type="submit" value="ارسال نظر"></form></div>`);
+            $('#websiteviewer_comments').append(`<div id="your_comment_div"><form onsubmit="postComment()" action="`+wurl+`" method="post"><input type="text" placeholder="نظر شما" id="your_comment_content"></textarea><div id="__google_recaptcha"></div><input onclick="postComment(event)" type="submit" value="ارسال نظر"></form></div>`);
             comment_recapcha_id=grecaptcha.render('__google_recaptcha',{'sitekey':'6LfaYSgUAAAAAFxMhXqtX6NdYW0jxFv1wnIFS1VS'});
             $('#websiteviewer_comments').append(`</div>`);
             for(var i=0;i<dr.comments.length;i++)

@@ -32,6 +32,9 @@ Route::match(['get','post'],'passreset','UserManagmentController@passwordReset')
 // فرم ارسال لینک ریست پسورد
 Route::match(['get','post'],'passremember','UserManagmentController@passRemeber');
 
+// مشاهده پروفایل کاربر
+Route::get('user/{user_name}','WebsitesController@showUserProfile');
+
 // مشاهده تمام سایت ها
 Route::get('websites','WebsitesController@showWebsites');
 // مشاهده تمام وبسایت های کاربر جهت بروز رسانی
